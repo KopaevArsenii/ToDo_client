@@ -6,8 +6,8 @@ import { useSelector } from "react-redux";
 import edit from "../../icons/edit.svg";
 import remove from "../../icons/remove.svg";
 import { selectAllCategories } from "../../features/categoriesSlice";
-import { ModalEditItem } from "../Modal/ModalEditItem";
-import { ModalRemoveItem } from "../Modal/ModalRemoveItem";
+import { EditItem } from "../../forms/EditItem";
+import { RemoveItem } from "../../forms/RemoveItem";
 
 interface ListItemProps {
   item: {
@@ -54,12 +54,12 @@ export const ListItem: React.FC<ListItemProps> = ({ item }) => {
             <img src={remove} alt="remove" />
           </button>
         </div>
-        <ModalEditItem
+        <EditItem
           item={item}
           active={editModalActive}
           setActive={setEditModalActive}
         />
-        <ModalRemoveItem
+        <RemoveItem
           item={item}
           active={removeModalActive}
           setActive={setRemoveModalActive}

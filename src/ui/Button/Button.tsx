@@ -1,4 +1,4 @@
-import "./ModalBtn.css";
+import "./Button.css";
 
 interface ModalBtnProps {
   type?: string;
@@ -7,7 +7,7 @@ interface ModalBtnProps {
   onClick: () => void;
 }
 
-export const ModalBtn: React.FC<ModalBtnProps> = ({
+export const Button: React.FC<ModalBtnProps> = ({
   type,
   children,
   size,

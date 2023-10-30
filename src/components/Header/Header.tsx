@@ -4,7 +4,7 @@ import {NavLink, useLocation} from "react-router-dom";
 
 /* APPLICATION */
 import "./Header.css";
-import { ModalCreateItem } from "../Modal/ModalCreateItem";
+import { CreateItem } from "../../forms/CreateItem";
 
 export const Header = () => {
   const { pathname } = useLocation(),
@@ -27,7 +27,7 @@ export const Header = () => {
       >
         {isCategories ? "Добавить категорию" : "Добавить задачу"}
       </button>
-      <ModalCreateItem
+      <CreateItem
         active={createModalActive}
         setActive={setCreateModalActive}
       />

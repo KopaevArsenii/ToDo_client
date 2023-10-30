@@ -1,14 +1,14 @@
 import important from "../../icons/important.svg";
 
-interface ModalInputProps {
-  name: string;
-  setName: React.Dispatch<React.SetStateAction<string>>;
+interface InputProps {
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
   size?: string;
 }
 
-export const ModalInput: React.FC<ModalInputProps> = ({
-  name,
-  setName,
+export const Input: React.FC<InputProps> = ({
+  value,
+  setValue,
   size,
 }) => {
   return (
@@ -21,11 +21,12 @@ export const ModalInput: React.FC<ModalInputProps> = ({
         id="modalinput"
         className="modalinput"
         placeholder="Введите имя задачи/категории"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
       />
       <img src={important} alt="important" className="modalinput-icon" />
       <label htmlFor="modalinput">Имя</label>
     </div>
   );
 };
+
