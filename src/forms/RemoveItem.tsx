@@ -14,14 +14,10 @@ interface ModalRemoveItemProps {
     description: string;
     category?: string;
   };
-  active: boolean;
-  setActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const RemoveItem: React.FC<ModalRemoveItemProps> = ({
   item,
-  active,
-  setActive,
 }) => {
   const dispatch = useDispatch(),
     { pathname } = useLocation(),

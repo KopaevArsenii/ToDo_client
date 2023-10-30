@@ -8,6 +8,7 @@ import remove from "../../icons/remove.svg";
 import { selectAllCategories } from "../../features/categoriesSlice";
 import { EditItem } from "../../forms/EditItem";
 import { RemoveItem } from "../../forms/RemoveItem";
+import { Modal } from '../Modal/Modal'
 
 interface ListItemProps {
   item: {
@@ -54,16 +55,13 @@ export const ListItem: React.FC<ListItemProps> = ({ item }) => {
             <img src={remove} alt="remove" />
           </button>
         </div>
-        <EditItem
-          item={item}
-          active={editModalActive}
-          setActive={setEditModalActive}
-        />
-        <RemoveItem
-          item={item}
-          active={removeModalActive}
-          setActive={setRemoveModalActive}
-        />
+        <Modal active={editModalActive} setActive={setRemoveModalActive}>
+          <EditItem item={item} />
+        </Modal>
+
+        <Modal active={removeModalActive} setActive={setRemoveModalActive}>
+          <RemoveItem item={item} />
+        </Modal>
       </li>
     </>
   );
