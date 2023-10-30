@@ -5,26 +5,39 @@ import { v4 as uuidv4 } from "uuid";
 /* APPLICATION */
 import { RootState } from "../app/store";
 
-export interface CategoriesState {
+export interface ITask {
   id: string;
   name: string;
   description: string;
   category: string;
 }
 
-const initialState: CategoriesState[] = [];
+export interface ICreateTask {
+  name: string,
+  description: string,
+  category: string
+}
+
+
+const initialState: ITask[] = [];
 
 export const tasksSlice = createSlice({
   name: "tasks",
   initialState,
   reducers: {
-    tasksAdded: (state, action) => {
+    tasksAdded: (
+        state: ITask[],
+        action: PayloadAction<ICreateTask>
+    ) => {
       state.push({
         id: uuidv4(),
         ...action.payload,
       });
     },
-    tasksUpdated: (state, action) => {
+    tasksUpdated: (
+        state: ITask[],
+        action: PayloadAction<ITask>
+    ) => {
       const { id, name, description, category } = action.payload,
         existingTask = state.find((task) => task.id === id);
 
@@ -34,15 +47,18 @@ export const tasksSlice = createSlice({
         existingTask.category = category;
       }
     },
-    tasksRemoved: (state, action) => {
-      let rm = (el: CategoriesState, i: number, arr: CategoriesState[]) =>
+    tasksRemoved: (
+        state: ITask[],
+        action: PayloadAction<string>
+    ) => {
+      let rm = (el: ITask, i: number, arr: ITask[]) =>
           el.id === action.payload,
         rmTaskIndex = state.findIndex(rm);
 
       state.splice(rmTaskIndex, 1);
     },
     tasksClearedCategories: (state, action) => {
-      state.map((task) => {
+      state.forEach((task) => {
         if (task.category === action.payload) task.category = "";
       });
     },

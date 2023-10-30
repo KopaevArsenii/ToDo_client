@@ -5,25 +5,36 @@ import { v4 as uuidv4 } from "uuid";
 /* APPLICATION */
 import { RootState } from "../app/store";
 
-export interface CategoriesState {
+export interface ICategory {
   id: string;
   name: string;
   description: string;
 }
 
-const initialState: CategoriesState[] = [];
+export interface ICreateCategory {
+  name: string,
+  description: string
+}
+
+const initialState: ICategory[] = [];
 
 export const categoriesSlice = createSlice({
   name: "categories",
   initialState,
   reducers: {
-    categoriesAdded: (state, action) => {
+    categoriesAdded: (
+        state: ICategory[],
+        action:PayloadAction<ICreateCategory>
+    ) => {
       state.push({
         id: uuidv4(),
         ...action.payload,
       });
     },
-    categoriesUpdated: (state, action) => {
+    categoriesUpdated: (
+        state: ICategory[],
+        action: PayloadAction<ICategory>
+    ) => {
       const { id, name, description } = action.payload,
         existingCategory = state.find((category) => category.id === id);
 
@@ -33,14 +44,13 @@ export const categoriesSlice = createSlice({
       }
     },
     categoriesRemoved: (
-      state: CategoriesState[],
+      state: ICategory[],
       action: PayloadAction<string>
     ) => {
-      let rm = (el: CategoriesState, i: number, arr: CategoriesState[]) =>
-          el.id === action.payload,
-        rmTaskIndex = state.findIndex(rm);
+      // state.filter((category: CategoriesState) => category.id === action.payload)
+      const remove = (element: ICategory) => element.id === action.payload, removeTaskIndex = state.findIndex(remove)
+      state.splice(removeTaskIndex, 1);
 
-      state.splice(rmTaskIndex, 1);
     },
   },
 });
