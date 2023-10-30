@@ -5,8 +5,9 @@ import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 
 /* APPLICATION */
-import { store } from "./app/store";
+import store, {persistor} from "./app/store";
 import App from "./App";
+import {PersistGate} from "redux-persist/integration/react"
 //import reportWebVitals from './reportWebVitals';
 import "./index.css";
 
@@ -17,7 +18,9 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+          <PersistGate loading={null} persistor={persistor}>
+              <App />
+          </PersistGate>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>
