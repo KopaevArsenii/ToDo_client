@@ -1,5 +1,5 @@
 /* VENDOR */
-import { useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 
@@ -7,19 +7,14 @@ import { useLocation } from "react-router-dom";
 import { Modal } from "../components/Modal/Modal";
 import { Input } from "../ui/Input/Input";
 import { Textarea } from "../ui/Textarea/Textarea";
-import { tasksAdded } from "../features/tasksSlice";
-import { categoriesAdded } from "../features/categoriesSlice";
+import { tasksAdded, tasksUpdated } from '../features/tasksSlice'
+import { categoriesAdded, categoriesUpdated } from '../features/categoriesSlice';
 import {Select} from "../ui/Select/Select";
 
 interface ModalCreateItemProps {
-  active: boolean;
-  setActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const CreateItem: React.FC<ModalCreateItemProps> = ({
-  active,
-  setActive,
-}) => {
+export const CreateItem: React.FC<ModalCreateItemProps> = ({}) => {
   const dispatch = useDispatch(),
     { pathname } = useLocation(),
     isCategories = pathname.includes("categories"),
@@ -33,28 +28,28 @@ export const CreateItem: React.FC<ModalCreateItemProps> = ({
     setCategory("");
   }
 
+    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        if (isCategories) {
+            dispatch(categoriesAdded({ name, description}))
+        } else {
+            dispatch(tasksAdded({ name, description, category}))
+        }
+    }
+
   return (
-      <div>Create Item Form</div>
-    // <Modal active={active} setActive={setActive} clearState={clearState}>
-    //   <ModalHeader
-    //     clearState={clearState}
-    //     setActive={setActive}
-    //     title={isCategories ? "Создание категории" : "Создание задачи"}
-    //   />
-    //   {isCategories ? (
-    //     <Input name={name} setValue={setName} size="large" />
-    //   ) : (
-    //   <div className="modal__content_row">
-    //       <Input name={name} setValue={setName} />
-    //       <Select value={category} setValue={setCategory} />
-    //   </div>
-    //   )}
-    //   <Textarea
-    //     value={description}
-    //     setValue={setDescription}
-    //   />
-    //   <ModalFooter
-    //     setActive={setActive}
+      <form onSubmit={onSubmit}>
+          {isCategories ? (
+              <Input value={name} label={"Название"} placeholder={"Введите название"} setValue={setName} />
+            ) : (
+            <div className="modal__content_row">
+                <Input value={name} label={"Название"} placeholder={"Введите название"} setValue={setName} />
+                <Select value={category} label={"Категории"} placeholder={"Выберете категорию"} setValue={setCategory} />
+            </div>
+            )}
+          <Textarea value={description} label={"Описание"} placeholder={"Введите описание"} setValue={setDescription} />
+          <button type="submit">Подтвердить</button>
+          <button onClick={() => window.location.reload()} type="button">Отмена</button>
+      </form>
     //     clearState={clearState}
     //     submitBtnText="Создать"
     //     size="large"
