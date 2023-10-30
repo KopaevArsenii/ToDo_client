@@ -43,7 +43,7 @@ export const EditItem: React.FC<EditItemProps> = ({ item, }) => {
         {isCategories ? (
             <Input value={name} label={"Название"} placeholder={"Введите название"} setValue={setName} />
             ) : (
-            <div className={"model__content_row"}>
+            <div className={"modal__content_row"}>
               <Input value={name} label={"Название"} placeholder={"Введите название"} setValue={setName} />
               <Select value={category} label={"Категория"} placeholder={"Выберете категориб"} setValue={setCategory} />
             </div>
