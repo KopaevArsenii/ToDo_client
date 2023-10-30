@@ -7,11 +7,11 @@ import { useLocation } from "react-router-dom";
 import { Modal } from "./Modal";
 import { ModalHeader } from "./ModalHeader";
 import { ModalInput } from "./ModalInput";
-import { ModalRow } from "./ModalRow";
 import { ModalTextarea } from "./ModalTextarea";
 import { ModalFooter } from "./ModalFooter";
 import { tasksAdded } from "../../features/tasksSlice";
 import { categoriesAdded } from "../../features/categoriesSlice";
+import {ModalDropdown} from "./ModalDropdown";
 
 interface ModalCreateItemProps {
   active: boolean;
@@ -25,14 +25,14 @@ export const ModalCreateItem: React.FC<ModalCreateItemProps> = ({
   const dispatch = useDispatch(),
     { pathname } = useLocation(),
     isCategories = pathname.includes("categories"),
-    [name, setName] = useState(""),
-    [selected, setSelected] = useState(""),
-    [description, setDescription] = useState("");
+    [name, setName] = useState<string>(""),
+    [category, setCategory] = useState<string>(""),
+    [description, setDescription] = useState<string>("");
 
   function clearState() {
     setName("");
     setDescription("");
-    setSelected("");
+    setCategory("");
   }
 
   return (
@@ -45,12 +45,10 @@ export const ModalCreateItem: React.FC<ModalCreateItemProps> = ({
       {isCategories ? (
         <ModalInput name={name} setName={setName} size="large" />
       ) : (
-        <ModalRow
-          name={name}
-          setName={setName}
-          selected={selected}
-          setSelected={setSelected}
-        />
+      <div className="modal__content_row">
+          <ModalInput name={name} setName={setName} />
+          <ModalDropdown selected={category} setSelected={setCategory} />
+      </div>
       )}
       <ModalTextarea
         description={description}
@@ -70,7 +68,7 @@ export const ModalCreateItem: React.FC<ModalCreateItemProps> = ({
                     : tasksAdded({
                         name,
                         description,
-                        category: selected,
+                        category,
                       })
                 );
                 clearState();

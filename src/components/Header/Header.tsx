@@ -1,6 +1,6 @@
 /* VENDOR */
 import { useState } from "react";
-import {Link, NavLink, useLocation} from "react-router-dom";
+import {NavLink, useLocation} from "react-router-dom";
 
 /* APPLICATION */
 import "./Header.css";
