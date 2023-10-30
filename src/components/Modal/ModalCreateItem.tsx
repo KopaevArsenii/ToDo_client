@@ -10,8 +10,8 @@ import { ModalInput } from "./ModalInput";
 import { ModalRow } from "./ModalRow";
 import { ModalTextarea } from "./ModalTextarea";
 import { ModalFooter } from "./ModalFooter";
-import { tasksAdded } from "../features/tasksSlice";
-import { categoriesAdded } from "../features/categoriesSlice";
+import { tasksAdded } from "../../features/tasksSlice";
+import { categoriesAdded } from "../../features/categoriesSlice";
 
 interface ModalCreateItemProps {
   active: boolean;

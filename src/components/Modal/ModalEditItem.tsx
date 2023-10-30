@@ -10,8 +10,8 @@ import { ModalRow } from "./ModalRow";
 import { ModalInput } from "./ModalInput";
 import { ModalTextarea } from "./ModalTextarea";
 import { ModalFooter } from "./ModalFooter";
-import { tasksUpdated } from "../features/tasksSlice";
-import { categoriesUpdated } from "../features/categoriesSlice";
+import { tasksUpdated } from "../../features/tasksSlice";
+import { categoriesUpdated } from "../../features/categoriesSlice";
 
 interface ModalEditItemProps {
   item: {

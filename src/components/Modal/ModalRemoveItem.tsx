@@ -7,8 +7,8 @@ import { Modal } from "./Modal";
 import { ModalHeader } from "./ModalHeader";
 import { ModalText } from "./ModalText";
 import { ModalFooter } from "./ModalFooter";
-import { tasksRemoved, tasksClearedCategories } from "../features/tasksSlice";
-import { categoriesRemoved } from "../features/categoriesSlice";
+import { tasksRemoved, tasksClearedCategories } from "../../features/tasksSlice";
+import { categoriesRemoved } from "../../features/categoriesSlice";
 
 interface ModalRemoveItemProps {
   item: {

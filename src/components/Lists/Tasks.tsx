@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 /* APPLICATION */
 import { ListItem } from "./ListItem";
-import { selectAllTasks } from "../features/tasksSlice";
+import { selectAllTasks } from "../../features/tasksSlice";
 
 export const Tasks: React.FC = () => {
   const tasks = useSelector(selectAllTasks);
