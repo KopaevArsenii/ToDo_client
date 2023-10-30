@@ -19,9 +19,12 @@ interface ListItemProps {
 }
 
 export const ListItem: React.FC<ListItemProps> = ({ item }) => {
-  const categories = useSelector(selectAllCategories),
-    [editModalActive, setEditModalActive] = useState(false)
-  let [removeModalActive, setRemoveModalActive] = useState(false);
+  const categories = useSelector(selectAllCategories)
+  const [editModalActive, setEditModalActive] = useState<boolean>(false)
+  const [removeModalActive, setRemoveModalActive] = useState<boolean>(false)
+
+  const handleSwitchEditModal = (e: React.MouseEvent<HTMLButtonElement>) => setEditModalActive(prev => !prev);
+  const handleSwitchRemoveModal = (e: React.MouseEvent<HTMLButtonElement>) => setRemoveModalActive(prev => !prev);
 
   return (
     <>
@@ -31,10 +34,7 @@ export const ListItem: React.FC<ListItemProps> = ({ item }) => {
             <h3 className="list-item-col1-row1__title">{item.name}</h3>
             {item.category && (
               <span className="list-item-col1-row1__category">
-                {
-                  categories.find((category) => category.id === item.category)
-                    ?.name
-                }
+                {categories.find((category) => category.id === item.category)?.name}
               </span>
             )}
           </div>
@@ -43,17 +43,13 @@ export const ListItem: React.FC<ListItemProps> = ({ item }) => {
         <div className="list-item-col2">
           <button
             className="list-item-col2__btn"
-            onClick={() => {
-              setEditModalActive(true);
-            }}
+            onClick={handleSwitchEditModal}
           >
             <img src={edit} alt="edit" />
           </button>
           <button
             className="list-item-col2__btn"
-            onClick={() => {
-              removeModalActive = true;
-            }}
+            onClick={handleSwitchRemoveModal}
           >
             <img src={remove} alt="remove" />
           </button>
