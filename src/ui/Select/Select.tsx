@@ -1,26 +1,28 @@
 /* VENDOR */
-import { useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 /* APPLICATION */
 import down from "../../icons/down.svg";
+import "./Select.css"
 import { selectAllCategories } from "../../features/categoriesSlice";
 
 interface SelectProps {
   value: string | undefined;
+  label:string;
+  placeholder: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export const Select: React.FC<SelectProps> = ({ value, setValue, }) => {
+export const Select: React.FC<SelectProps> = ({ value, label,placeholder, setValue, }) => {
   const [isActive, setIsActive] = useState<boolean>(false);
   const options = useSelector(selectAllCategories);
 
   return (
     <div className="dropdown" onClick={() => setIsActive(!isActive)}>
-      <span className="dropdown-label">Категория</span>
+      <span className="dropdown-label">{label}</span>
       <div className={value ? "dropdown-btn" : "dropdown-btn placeholder"}>
-        {options.find((option) => option.id === value)?.name ||
-          "Выберите категорию"}
+        {options.find((option) => option.id === value)?.name || placeholder}
         <img src={down} alt="open dropdown" />
       </div>
       {isActive && (

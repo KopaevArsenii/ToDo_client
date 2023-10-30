@@ -1,0 +1,56 @@
+.modalinput {
+    box-sizing: border-box;
+    padding: 8px;
+    height: 46px;
+    width: 100%;
+    background: transparent;
+    border: 2px solid #3f72af;
+    border-radius: 4px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 46px;
+}
+
+.modalinput::placeholder {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+
+.modalinput-wrapper {
+    box-sizing: border-box;
+    width: 364px;
+    position: relative;
+    margin-bottom: 34px;
+}
+
+.modalinput-wrapper.large {
+    width: 100%;
+}
+
+.modalinput:focus {
+    outline: none;
+}
+
+.modalinput-icon {
+    position: absolute;
+    left: 55px;
+    top: -11px;
+    z-index: 1;
+}
+
+[for="modalinput"],
+[for="modaltextarea"],
+.dropdown-label {
+    font-style: normal;
+    display: inline-block;
+    background-color: #dbe2ef;
+    font-weight: 400;
+    padding: 4px;
+    font-size: 18px;
+    line-height: 20px;
+    color: #3f72af;
+    position: absolute;
+    left: 12px;
+    top: -15px;
+}
