@@ -55,11 +55,11 @@ export const ListItem: React.FC<ListItemProps> = ({ item }) => {
             <img src={remove} alt="remove" />
           </button>
         </div>
-        <Modal active={editModalActive} setActive={setRemoveModalActive}>
+        <Modal name={"Редактирование"} active={editModalActive} setActive={setEditModalActive}>
           <EditItem item={item} />
         </Modal>
 
-        <Modal active={removeModalActive} setActive={setRemoveModalActive}>
+        <Modal name={"Удаление"} active={removeModalActive} setActive={setRemoveModalActive}>
           <RemoveItem item={item} />
         </Modal>
       </li>

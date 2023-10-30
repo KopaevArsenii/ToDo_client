@@ -28,7 +28,7 @@ export const Header = () => {
       >
         {isCategories ? "Добавить категорию" : "Добавить задачу"}
       </button>
-        <Modal active={createModalActive} setActive={setCreateModalActive}>
+        <Modal name={"Создание"} active={createModalActive} setActive={setCreateModalActive}>
             <CreateItem />
         </Modal>
 
