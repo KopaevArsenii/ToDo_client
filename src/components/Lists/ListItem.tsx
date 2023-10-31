@@ -70,6 +70,7 @@ export const ListItem: React.FC<ListItemProps> = ({ item }) => {
                     name={"Редактирование"}
                     active={editModalActive}
                     setActive={setEditModalActive}
+                    buttonUnavailable
                 >
                     <EditItem setModal={setEditModalActive} item={item} />
                 </Modal>
