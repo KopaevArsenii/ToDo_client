@@ -4,13 +4,11 @@ import { useDispatch } from "react-redux"
 import { useLocation } from "react-router-dom"
 
 /* APPLICATION */
-import { Modal } from "../components/Modal/Modal"
 import { Input } from "../ui/Input/Input"
 import { Textarea } from "../ui/Textarea/Textarea"
 import { tasksUpdated } from "../features/tasksSlice"
 import { categoriesUpdated } from "../features/categoriesSlice"
 import { Select } from "../ui/Select/Select"
-import { Button } from "../ui/Button/Button"
 
 interface EditItemProps {
     item: {
@@ -30,6 +28,9 @@ export const EditItem: React.FC<EditItemProps> = ({ item }) => {
         [description, setDescription] = useState<string>(item.description)
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        if (name === "") return
+
         if (isCategories) {
             dispatch(categoriesUpdated({ id: item.id, name, description }))
         } else {

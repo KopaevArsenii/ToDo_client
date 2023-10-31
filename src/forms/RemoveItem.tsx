@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux"
 import { useLocation } from "react-router-dom"
 
 /* APPLICATION */
-import { Modal } from "../components/Modal/Modal"
 import { tasksRemoved, tasksClearedCategories } from "../features/tasksSlice"
 import { categoriesRemoved } from "../features/categoriesSlice"
 import React from "react"

@@ -4,16 +4,15 @@ import { useDispatch } from "react-redux"
 import { useLocation } from "react-router-dom"
 
 /* APPLICATION */
-import { Modal } from "../components/Modal/Modal"
 import { Input } from "../ui/Input/Input"
 import { Textarea } from "../ui/Textarea/Textarea"
-import { tasksAdded, tasksUpdated } from "../features/tasksSlice"
-import { categoriesAdded, categoriesUpdated } from "../features/categoriesSlice"
+import { tasksAdded } from "../features/tasksSlice"
+import { categoriesAdded } from "../features/categoriesSlice"
 import { Select } from "../ui/Select/Select"
 
 interface CreateItemProps {}
 
-export const CreateItem: React.FC<CreateItemProps> = ({}) => {
+export const CreateItem: React.FC<CreateItemProps> = () => {
     const dispatch = useDispatch(),
         { pathname } = useLocation(),
         isCategories = pathname.includes("categories"),
@@ -28,6 +27,8 @@ export const CreateItem: React.FC<CreateItemProps> = ({}) => {
     }
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        if (name === "") return
         if (isCategories) {
             dispatch(categoriesAdded({ name, description }))
         } else {
