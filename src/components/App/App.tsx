@@ -1,5 +1,5 @@
 /* VENDOR */
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 
 /* APPLICATION */
 import "./App.css";
@@ -14,7 +14,7 @@ function App() {
       <Routes>
         <Route path="/tasks" element={<Tasks />} />
         <Route path="/categories" element={<Categories />} />
-        <Route index element={<Tasks />} />
+        <Route path="*" element={<Navigate to={"/tasks"} />} />
       </Routes>
     </div>
   );
