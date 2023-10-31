@@ -5,7 +5,7 @@ import { useSelector } from "react-redux"
 /* APPLICATION */
 import down from "../../icons/down.svg"
 import "./Select.css"
-import { selectAllCategories } from "../../features/categoriesSlice"
+import { getAllCategories } from "../../features/categoriesSlice"
 
 interface SelectProps {
     value: string | undefined
@@ -21,7 +21,7 @@ export const Select: React.FC<SelectProps> = ({
     setValue,
 }) => {
     const [isActive, setIsActive] = useState<boolean>(false)
-    const options = useSelector(selectAllCategories)
+    const options = useSelector(getAllCategories)
 
     return (
         <div className="dropdown" onClick={() => setIsActive(!isActive)}>

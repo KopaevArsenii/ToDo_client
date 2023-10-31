@@ -24,13 +24,13 @@ export const tasksSlice = createSlice({
     name: "tasks",
     initialState,
     reducers: {
-        tasksAdded: (state: ITask[], action: PayloadAction<ICreateTask>) => {
+        addTask: (state: ITask[], action: PayloadAction<ICreateTask>) => {
             state.push({
                 id: uuidv4(),
                 ...action.payload,
             })
         },
-        tasksUpdated: (state: ITask[], action: PayloadAction<ITask>) => {
+        updateTask: (state: ITask[], action: PayloadAction<ITask>) => {
             const { id, name, description, category } = action.payload,
                 existingTask = state.find((task) => task.id === id)
 
@@ -40,14 +40,14 @@ export const tasksSlice = createSlice({
                 existingTask.category = category
             }
         },
-        tasksRemoved: (state: ITask[], action: PayloadAction<string>) => {
+        deleteTask: (state: ITask[], action: PayloadAction<string>) => {
             let rm = (el: ITask, i: number, arr: ITask[]) =>
                     el.id === action.payload,
                 rmTaskIndex = state.findIndex(rm)
 
             state.splice(rmTaskIndex, 1)
         },
-        tasksClearedCategories: (state, action) => {
+        clearTaskCategory: (state, action) => {
             state.forEach((task) => {
                 if (task.category === action.payload) task.category = ""
             })
@@ -55,13 +55,9 @@ export const tasksSlice = createSlice({
     },
 })
 
-export const {
-    tasksAdded,
-    tasksUpdated,
-    tasksRemoved,
-    tasksClearedCategories,
-} = tasksSlice.actions
+export const { addTask, updateTask, deleteTask, clearTaskCategory } =
+    tasksSlice.actions
 
-export const selectAllTasks = (state: RootState) => state.tasks
+export const getAllTasks = (state: RootState) => state.tasks
 
 export default tasksSlice.reducer

@@ -22,7 +22,7 @@ export const categoriesSlice = createSlice({
     name: "categories",
     initialState,
     reducers: {
-        categoriesAdded: (
+        addCategory: (
             state: ICategory[],
             action: PayloadAction<ICreateCategory>,
         ) => {
@@ -31,7 +31,7 @@ export const categoriesSlice = createSlice({
                 ...action.payload,
             })
         },
-        categoriesUpdated: (
+        updateCategory: (
             state: ICategory[],
             action: PayloadAction<ICategory>,
         ) => {
@@ -43,10 +43,7 @@ export const categoriesSlice = createSlice({
                 existingCategory.description = description
             }
         },
-        categoriesRemoved: (
-            state: ICategory[],
-            action: PayloadAction<string>,
-        ) => {
+        deleteCategory: (state: ICategory[], action: PayloadAction<string>) => {
             // state.filter((category: CategoriesState) => category.id === action.payload)
             const remove = (element: ICategory) =>
                     element.id === action.payload,
@@ -56,9 +53,9 @@ export const categoriesSlice = createSlice({
     },
 })
 
-export const { categoriesAdded, categoriesUpdated, categoriesRemoved } =
+export const { addCategory, updateCategory, deleteCategory } =
     categoriesSlice.actions
 
-export const selectAllCategories = (state: RootState) => state.categories
+export const getAllCategories = (state: RootState) => state.categories
 
 export default categoriesSlice.reducer

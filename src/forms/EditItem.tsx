@@ -6,8 +6,8 @@ import { useLocation } from "react-router-dom"
 /* APPLICATION */
 import { Input } from "../ui/Input/Input"
 import { Textarea } from "../ui/Textarea/Textarea"
-import { tasksUpdated } from "../features/tasksSlice"
-import { categoriesUpdated } from "../features/categoriesSlice"
+import { updateTask } from "../features/tasksSlice"
+import { updateCategory } from "../features/categoriesSlice"
 import { Select } from "../ui/Select/Select"
 
 interface EditItemProps {
@@ -32,9 +32,9 @@ export const EditItem: React.FC<EditItemProps> = ({ item }) => {
         if (name === "") return
 
         if (isCategories) {
-            dispatch(categoriesUpdated({ id: item.id, name, description }))
+            dispatch(updateCategory({ id: item.id, name, description }))
         } else {
-            dispatch(tasksUpdated({ id: item.id, name, description, category }))
+            dispatch(updateTask({ id: item.id, name, description, category }))
         }
     }
     return (

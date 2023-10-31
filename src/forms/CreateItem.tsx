@@ -6,8 +6,8 @@ import { useLocation } from "react-router-dom"
 /* APPLICATION */
 import { Input } from "../ui/Input/Input"
 import { Textarea } from "../ui/Textarea/Textarea"
-import { tasksAdded } from "../features/tasksSlice"
-import { categoriesAdded } from "../features/categoriesSlice"
+import { addTask } from "../features/tasksSlice"
+import { addCategory } from "../features/categoriesSlice"
 import { Select } from "../ui/Select/Select"
 
 interface CreateItemProps {}
@@ -30,9 +30,9 @@ export const CreateItem: React.FC<CreateItemProps> = () => {
         e.preventDefault()
         if (name === "") return
         if (isCategories) {
-            dispatch(categoriesAdded({ name, description }))
+            dispatch(addCategory({ name, description }))
         } else {
-            dispatch(tasksAdded({ name, description, category }))
+            dispatch(addTask({ name, description, category }))
         }
         clearForm()
         // closeModal();

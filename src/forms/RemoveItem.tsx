@@ -3,8 +3,8 @@ import { useDispatch } from "react-redux"
 import { useLocation } from "react-router-dom"
 
 /* APPLICATION */
-import { tasksRemoved, tasksClearedCategories } from "../features/tasksSlice"
-import { categoriesRemoved } from "../features/categoriesSlice"
+import { deleteTask, clearTaskCategory } from "../features/tasksSlice"
+import { deleteCategory } from "../features/categoriesSlice"
 import React from "react"
 
 interface ModalRemoveItemProps {
@@ -24,10 +24,10 @@ export const RemoveItem: React.FC<ModalRemoveItemProps> = ({ item }) => {
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         if (isCategories) {
-            dispatch(categoriesRemoved(item.id))
-            dispatch(tasksClearedCategories(item.id))
+            dispatch(deleteCategory(item.id))
+            dispatch(clearTaskCategory(item.id))
         } else {
-            dispatch(tasksRemoved(item.id))
+            dispatch(deleteTask(item.id))
         }
     }
 
