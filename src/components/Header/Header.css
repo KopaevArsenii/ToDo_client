@@ -1,59 +1,58 @@
 .header {
-  background-color: #3f72af;
-  box-sizing: border-box;
-  height: 80px;
-  padding: 24px;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  width: 100%;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+    background-color: #3f72af;
+    box-sizing: border-box;
+    height: 80px;
+    padding: 24px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 .header-title {
-  font-weight: 400;
-  font-size: 36px;
-  line-height: 40px;
-  /*width: 350px;*/
-  /*width: 300px;*/
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 40px;
+    /*width: 350px;*/
+    /*width: 300px;*/
 }
 
 .header-nav {
-  width: 60%;
-  display: flex;
-  gap: 20px;
+    width: 60%;
+    display: flex;
+    gap: 20px;
 }
 
 .header-list {
-  display: flex;
-  list-style-type: none;
+    display: flex;
+    list-style-type: none;
 }
 
 .header-nav-item {
-  font-size: 20px;
-  color: white;
-  text-decoration: none;
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
 }
 
 .header-nav-item-active {
-  color: lightblue;
+    color: lightblue;
 }
-
 
 .header-button {
-  cursor: pointer;
-  box-sizing: border-box;
-  height: 46px;
-  border: none;
-  color: #fff;
-  font-size: 20px;
-  line-height: 46px;
-  background-color: #3f72af;
-  width: 200px;
+    cursor: pointer;
+    box-sizing: border-box;
+    height: 46px;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    line-height: 46px;
+    background-color: #3f72af;
+    width: 200px;
 }
 .header-button:hover {
-  color: lightblue;
-  opacity: 50;
+    color: lightblue;
+    opacity: 50;
 }

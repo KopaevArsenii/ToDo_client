@@ -1,27 +1,27 @@
-import "./Button.css";
+import "./Button.css"
 
 interface ModalBtnProps {
-  type?: string;
-  children: React.ReactNode;
-  size?: string;
-  onClick: () => void;
+    type?: string
+    children: React.ReactNode
+    size?: string
+    onClick: () => void
 }
 
 export const Button: React.FC<ModalBtnProps> = ({
-  type,
-  children,
-  size,
-  onClick,
+    type,
+    children,
+    size,
+    onClick,
 }) => {
-  const btnClass =
-    type === "primary"
-      ? size === "large"
-        ? "modalbtn primary large"
-        : "modalbtn primary"
-      : "modalbtn";
-  return (
-    <button className={btnClass} onClick={onClick}>
-      {children}
-    </button>
-  );
-};
+    const btnClass =
+        type === "primary"
+            ? size === "large"
+                ? "modalbtn primary large"
+                : "modalbtn primary"
+            : "modalbtn"
+    return (
+        <button className={btnClass} onClick={onClick}>
+            {children}
+        </button>
+    )
+}
