@@ -3,10 +3,9 @@ import { useState } from "react"
 import { NavLink, useLocation } from "react-router-dom"
 
 /* APPLICATION */
-import "./Header.css"
-import { CreateItem } from "../../forms/CreateItem"
-import { Modal } from "../Modal/Modal"
-import logo from "../../icons/logo.svg"
+import { CreateItem } from "../forms/CreateItem"
+import { Modal } from "./Modal"
+import logo from "../icons/logo.svg"
 
 export const Header = () => {
     const { pathname } = useLocation(),
@@ -22,7 +21,7 @@ export const Header = () => {
         <>
             <header className="w-full flex max-w-[1440px] py-[30px] mx-auto items-center gap-[100px]">
                 <img className="w-[60px] h-[60px]" src={logo} alt="logo" />
-                <nav className="header-nav">
+                <nav className="w-full flex gap-[10px]">
                     <NavLink
                         to={"/tasks"}
                         className={({ isActive }) =>

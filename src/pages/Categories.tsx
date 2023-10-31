@@ -2,7 +2,7 @@
 import { useSelector } from "react-redux"
 
 /* APPLICATION */
-import { ListItem } from "../components/ListItem/ListItem"
+import { ListItem } from "../components/ListItem"
 import { getAllCategories } from "../features/categoriesSlice"
 
 export const Categories = () => {

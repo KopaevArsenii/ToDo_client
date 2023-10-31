@@ -2,7 +2,7 @@
 import { useSelector } from "react-redux"
 
 /* APPLICATION */
-import { ListItem } from "../components/ListItem/ListItem"
+import { ListItem } from "../components/ListItem"
 import { getAllTasks } from "../features/tasksSlice"
 import React, { useState } from "react"
 import { Select } from "../ui/Select"

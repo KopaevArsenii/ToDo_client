@@ -3,12 +3,12 @@ import { useState } from "react"
 import { useSelector } from "react-redux"
 
 /* APPLICATION */
-import edit from "../../icons/edit.svg"
-import remove from "../../icons/remove.svg"
-import { getAllCategories } from "../../features/categoriesSlice"
-import { EditItem } from "../../forms/EditItem"
-import { RemoveItem } from "../../forms/RemoveItem"
-import { Modal } from "../Modal/Modal"
+import edit from "../icons/edit.svg"
+import remove from "../icons/remove.svg"
+import { getAllCategories } from "../features/categoriesSlice"
+import { EditItem } from "../forms/EditItem"
+import { RemoveItem } from "../forms/RemoveItem"
+import { Modal } from "./Modal"
 
 interface ListItemProps {
     item: {
