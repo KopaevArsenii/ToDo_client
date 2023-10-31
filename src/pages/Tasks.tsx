@@ -2,13 +2,14 @@
 import { useSelector } from "react-redux"
 
 /* APPLICATION */
-import { ListItem } from "./ListItem"
-import { getAllTasks } from "../../features/tasksSlice"
+import { ListItem } from "../components/ListItem/ListItem"
+import { getAllTasks } from "../features/tasksSlice"
 import React, { useState } from "react"
-import { Select } from "../../ui/Select/Select"
-import { Input } from "../../ui/Input/Input"
+import { Select } from "../ui/Select"
+import { Input } from "../ui/Input"
+import close from "../icons/close.svg"
 
-import "../Modal/Modal.css"
+import "../components/Modal/Modal.css"
 
 export const Tasks: React.FC = () => {
     const tasks = useSelector(getAllTasks)
@@ -45,8 +46,8 @@ export const Tasks: React.FC = () => {
     }
 
     return (
-        <>
-            <div className={"flex"}>
+        <div className="max-w-[1440px] flex flex-col gap-[30px] mx-auto py-[30px]">
+            <div className={"flex gap-[30px]"}>
                 <Input
                     value={search}
                     label={"Название задачи"}
@@ -59,14 +60,19 @@ export const Tasks: React.FC = () => {
                     placeholder={"Введите назавние категории"}
                     setValue={setCategory}
                 />
-                <button onClick={handleClearFilters}>Очистить</button>
+                <button
+                    className="border border-slate-200 hover:border-indigo-500 rounded-[8px] w-[64px] h-[64px] shrink-0"
+                    onClick={handleClearFilters}
+                >
+                    <img className="m-auto" src={close} alt={"close"} />
+                </button>
             </div>
-            <ul className="max-w-[1440px] mx-auto bg-white flex flex-col gap-[30px]">
+            <ul className="flex flex-col gap-[30px]">
                 {viewList.map((task) => (
                     <ListItem key={task.id} item={task} />
                 ))}
                 {viewList.length === 0 && <div>Ничего не найдено!</div>}
             </ul>
-        </>
+        </div>
     )
 }

@@ -73,13 +73,13 @@ export const ListItem: React.FC<ListItemProps> = ({ item }) => {
                 <div className={"flex gap-[20px] items-center"}>
                     <button
                         onClick={handleSwitchEditModal}
-                        className="border border-zinc-400 rounded-[8px] w-[40px] h-[40px]"
+                        className="border border-slate-200 hover:border-indigo-500 rounded-[8px] w-[40px] h-[40px]"
                     >
                         <img className="m-auto" src={edit} alt={"edit"} />
                     </button>
                     <button
                         onClick={handleSwitchRemoveModal}
-                        className="border border-zinc-400 rounded-[8px] w-[40px] h-[40px]"
+                        className="border border-slate-200 hover:border-indigo-500 rounded-[8px] w-[40px] h-[40px]"
                     >
                         <img className="m-auto" src={remove} alt={"remove"} />
                     </button>

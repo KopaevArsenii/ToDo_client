@@ -4,11 +4,11 @@ import { useDispatch } from "react-redux"
 import { useLocation } from "react-router-dom"
 
 /* APPLICATION */
-import { Input } from "../ui/Input/Input"
-import { Textarea } from "../ui/Textarea/Textarea"
+import { Input } from "../ui/Input"
+import { Textarea } from "../ui/Textarea"
 import { addTask } from "../features/tasksSlice"
 import { addCategory } from "../features/categoriesSlice"
-import { Select } from "../ui/Select/Select"
+import { Select } from "../ui/Select"
 
 interface CreateItemProps {
     setModal: React.Dispatch<React.SetStateAction<boolean>>

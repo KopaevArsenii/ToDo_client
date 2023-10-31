@@ -6,6 +6,7 @@ import { NavLink, useLocation } from "react-router-dom"
 import "./Header.css"
 import { CreateItem } from "../../forms/CreateItem"
 import { Modal } from "../Modal/Modal"
+import logo from "../../icons/logo.svg"
 
 export const Header = () => {
     const { pathname } = useLocation(),
@@ -18,40 +19,46 @@ export const Header = () => {
     }
 
     return (
-        <header className="header">
-            <h1 className="header-title">ToDo List</h1>
-            <nav className="header-nav">
-                <NavLink
-                    to={"/tasks"}
-                    className={({ isActive }) =>
-                        isActive
-                            ? "header-nav-item header-nav-item-active"
-                            : "header-nav-item"
-                    }
+        <>
+            <header className="w-full flex max-w-[1440px] py-[30px] mx-auto items-center gap-[100px]">
+                <img className="w-[60px] h-[60px]" src={logo} alt="logo" />
+                <nav className="header-nav">
+                    <NavLink
+                        to={"/tasks"}
+                        className={({ isActive }) =>
+                            isActive
+                                ? "font-medium text-[22px]"
+                                : " font-normal text-[22px]"
+                        }
+                    >
+                        Задачи
+                    </NavLink>
+                    <NavLink
+                        to={"/categories"}
+                        className={({ isActive }) =>
+                            isActive
+                                ? "font-medium text-[22px]"
+                                : "font-normal text-[22px]"
+                        }
+                    >
+                        Категории
+                    </NavLink>
+                </nav>
+                <button
+                    className="bg-indigo-500 text-white w-[300px] h-[60px] rounded-[10px] text-[22px] font-medium"
+                    onClick={handleSwitchCreateModal}
                 >
-                    Задачи
-                </NavLink>
-                <NavLink
-                    to={"/categories"}
-                    className={({ isActive }) =>
-                        isActive
-                            ? "header-nav-item header-nav-item-active"
-                            : "header-nav-item"
-                    }
+                    {isCategories ? "Добавить категорию" : "Добавить задачу"}
+                </button>
+                <Modal
+                    name={"Создание"}
+                    active={createModalActive}
+                    setActive={setCreateModalActive}
                 >
-                    Категории
-                </NavLink>
-            </nav>
-            <button className="header-button" onClick={handleSwitchCreateModal}>
-                {isCategories ? "Добавить категорию" : "Добавить задачу"}
-            </button>
-            <Modal
-                name={"Создание"}
-                active={createModalActive}
-                setActive={setCreateModalActive}
-            >
-                <CreateItem setModal={setCreateModalActive} />
-            </Modal>
-        </header>
+                    <CreateItem setModal={setCreateModalActive} />
+                </Modal>
+            </header>
+            <div className="h-[1px] bg-slate-200 w-full"></div>
+        </>
     )
 }

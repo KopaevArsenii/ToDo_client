@@ -4,11 +4,11 @@ import { useDispatch } from "react-redux"
 import { useLocation } from "react-router-dom"
 
 /* APPLICATION */
-import { Input } from "../ui/Input/Input"
-import { Textarea } from "../ui/Textarea/Textarea"
+import { Input } from "../ui/Input"
+import { Textarea } from "../ui/Textarea"
 import { updateTask } from "../features/tasksSlice"
 import { updateCategory } from "../features/categoriesSlice"
-import { Select } from "../ui/Select/Select"
+import { Select } from "../ui/Select"
 
 interface EditItemProps {
     item: {
