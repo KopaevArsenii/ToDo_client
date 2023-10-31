@@ -71,7 +71,7 @@ export const ListItem: React.FC<ListItemProps> = ({ item }) => {
                     active={editModalActive}
                     setActive={setEditModalActive}
                 >
-                    <EditItem item={item} />
+                    <EditItem setModal={setEditModalActive} item={item} />
                 </Modal>
 
                 <Modal
@@ -79,7 +79,7 @@ export const ListItem: React.FC<ListItemProps> = ({ item }) => {
                     active={removeModalActive}
                     setActive={setRemoveModalActive}
                 >
-                    <RemoveItem item={item} />
+                    <RemoveItem setModal={setRemoveModalActive} item={item} />
                 </Modal>
             </li>
         </>

@@ -1,5 +1,5 @@
 /* VENDOR */
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { useLocation } from "react-router-dom"
 
@@ -17,9 +17,10 @@ interface EditItemProps {
         description: string
         category?: string
     }
+    setModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const EditItem: React.FC<EditItemProps> = ({ item }) => {
+export const EditItem: React.FC<EditItemProps> = ({ item, setModal }) => {
     const dispatch = useDispatch(),
         { pathname } = useLocation(),
         isCategories = pathname.includes("categories"),
@@ -36,6 +37,12 @@ export const EditItem: React.FC<EditItemProps> = ({ item }) => {
         } else {
             dispatch(updateTask({ id: item.id, name, description, category }))
         }
+
+        setModal(false)
+    }
+
+    const handleCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
+        setModal(false)
     }
     return (
         <form onSubmit={onSubmit}>
@@ -70,42 +77,9 @@ export const EditItem: React.FC<EditItemProps> = ({ item }) => {
                 setValue={setDescription}
             />
             <button type="submit">Подтвердить</button>
-            <button onClick={() => window.location.reload()} type="button">
+            <button onClick={handleCancel} type="button">
                 Отмена
             </button>
         </form>
-        // <Modal item={item} active={active} setActive={setActive}>
-        //   <ModalHeader
-        //     setActive={setActive}
-        //     title={
-        //       isCategories ? "Редактирование категории" : "Редактирование задачи"
-        //     }
-        //   />
-        //   {isCategories ? (
-        //     <Input name={name} setValue={setName} size="large" />
-        //   ) : (
-        //   <div className="modal__content_row">
-        //       <Input name={name} setValue={setName} />
-        //       <Select value={category} setValue={setCategory} />
-        //   </div>
-        //   )}
-        //   <Textarea
-        //     value={description}
-        //     setValue={setDescription}
-        //   />
-        //   <ModalFooter
-        //     setActive={setActive}
-        //     submitBtnText="Сохранить"
-        //     size="large"
-        //     onSubmit={() => {
-        //       dispatch(
-        //         isCategories
-        //           ? categoriesUpdated({ id: item.id, name, description })
-        //           : tasksUpdated({ id: item.id, name, description, category })
-        //       );
-        //       setActive(false);
-        //     }}
-        //   />
-        // </Modal>
     )
 }

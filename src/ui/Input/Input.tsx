@@ -14,16 +14,9 @@ export const Input: React.FC<InputProps> = ({
     label,
     placeholder,
     setValue,
-    size,
 }) => {
     return (
-        <div
-            className={
-                size === "large"
-                    ? "modalinput-wrapper large"
-                    : "modalinput-wrapper"
-            }
-        >
+        <div className={"modalinput-wrapper large"}>
             <input
                 id="modalinput"
                 className="modalinput"

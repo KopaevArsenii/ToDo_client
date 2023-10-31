@@ -50,7 +50,7 @@ export const Header = () => {
                 active={createModalActive}
                 setActive={setCreateModalActive}
             >
-                <CreateItem />
+                <CreateItem setModal={setCreateModalActive} />
             </Modal>
         </header>
     )

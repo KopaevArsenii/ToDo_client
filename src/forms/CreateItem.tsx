@@ -10,9 +10,11 @@ import { addTask } from "../features/tasksSlice"
 import { addCategory } from "../features/categoriesSlice"
 import { Select } from "../ui/Select/Select"
 
-interface CreateItemProps {}
+interface CreateItemProps {
+    setModal: React.Dispatch<React.SetStateAction<boolean>>
+}
 
-export const CreateItem: React.FC<CreateItemProps> = () => {
+export const CreateItem: React.FC<CreateItemProps> = ({ setModal }) => {
     const dispatch = useDispatch(),
         { pathname } = useLocation(),
         isCategories = pathname.includes("categories"),
@@ -35,7 +37,11 @@ export const CreateItem: React.FC<CreateItemProps> = () => {
             dispatch(addTask({ name, description, category }))
         }
         clearForm()
-        // closeModal();
+        setModal(false)
+    }
+
+    const handleCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
+        setModal(false)
     }
 
     return (
@@ -70,7 +76,7 @@ export const CreateItem: React.FC<CreateItemProps> = () => {
                 setValue={setDescription}
             />
             <button type="submit">Подтвердить</button>
-            <button onClick={() => window.location.reload()} type="button">
+            <button onClick={handleCancel} type="button">
                 Отмена
             </button>
         </form>

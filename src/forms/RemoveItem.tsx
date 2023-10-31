@@ -14,9 +14,13 @@ interface ModalRemoveItemProps {
         description: string
         category?: string
     }
+    setModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const RemoveItem: React.FC<ModalRemoveItemProps> = ({ item }) => {
+export const RemoveItem: React.FC<ModalRemoveItemProps> = ({
+    item,
+    setModal,
+}) => {
     const dispatch = useDispatch(),
         { pathname } = useLocation(),
         isCategories = pathname.includes("categories"),
@@ -29,31 +33,20 @@ export const RemoveItem: React.FC<ModalRemoveItemProps> = ({ item }) => {
         } else {
             dispatch(deleteTask(item.id))
         }
+        setModal(false)
+    }
+
+    const handleCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
+        setModal(false)
     }
 
     return (
         <form onSubmit={onSubmit}>
             <div>{text}</div>
             <button type="submit">Подтвердить</button>
-            <button onClick={() => window.location.reload()} type="button">
+            <button onClick={handleCancel} type="button">
                 Отмена
             </button>
         </form>
-        // <Modal item={item} active={active} setActive={setActive}>
-        //   <ModalHeader setActive={setActive} title={"Удаление задачи"} />
-        //   <ModalText text={text} />
-        //   <ModalFooter
-        //     setActive={setActive}
-        //     submitBtnText="Да"
-        //     onSubmit={
-        //       isCategories
-        //         ? () => {
-        //             dispatch(categoriesRemoved(item.id));
-        //             dispatch(tasksClearedCategories(item.id));
-        //           }
-        //         : () => dispatch(tasksRemoved(item.id))
-        //     }
-        //   />
-        // </Modal>
     )
 }
