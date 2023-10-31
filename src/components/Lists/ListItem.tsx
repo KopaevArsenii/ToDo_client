@@ -29,60 +29,118 @@ export const ListItem: React.FC<ListItemProps> = ({ item }) => {
     const handleSwitchRemoveModal = (e: React.MouseEvent<HTMLButtonElement>) =>
         setRemoveModalActive((prev) => !prev)
 
+    const categoryName = categories.find(
+        (category) => category.id === item.category,
+    )?.name
+
     return (
         <>
-            <li className="list-item">
-                <div className="list-item-col1">
-                    <div className="list-item-col1-row1">
-                        <h3 className="list-item-col1-row1__title">
-                            {item.name}
-                        </h3>
-                        {item.category && (
-                            <span className="list-item-col1-row1__category">
-                                {
-                                    categories.find(
-                                        (category) =>
-                                            category.id === item.category,
-                                    )?.name
-                                }
-                            </span>
-                        )}
-                    </div>
-                    <div className="list-item-col1-row2">
-                        {item.description}
-                    </div>
-                </div>
-                <div className="list-item-col2">
-                    <button
-                        className="list-item-col2__btn"
-                        onClick={handleSwitchEditModal}
-                    >
-                        <img src={edit} alt="edit" />
-                    </button>
-                    <button
-                        className="list-item-col2__btn"
-                        onClick={handleSwitchRemoveModal}
-                    >
-                        <img src={remove} alt="remove" />
-                    </button>
-                </div>
-                <Modal
-                    name={"Редактирование"}
-                    active={editModalActive}
-                    setActive={setEditModalActive}
-                    buttonUnavailable
-                >
-                    <EditItem setModal={setEditModalActive} item={item} />
-                </Modal>
+            <Modal
+                name={"Редактирование"}
+                active={editModalActive}
+                setActive={setEditModalActive}
+                buttonUnavailable
+            >
+                <EditItem setModal={setEditModalActive} item={item} />
+            </Modal>
 
-                <Modal
-                    name={"Удаление"}
-                    active={removeModalActive}
-                    setActive={setRemoveModalActive}
-                >
-                    <RemoveItem setModal={setRemoveModalActive} item={item} />
-                </Modal>
+            <Modal
+                name={"Удаление"}
+                active={removeModalActive}
+                setActive={setRemoveModalActive}
+            >
+                <RemoveItem setModal={setRemoveModalActive} item={item} />
+            </Modal>
+
+            <li className="w-full py-[30px] px-[40px] flex justify-between border border-slate-200 rounded-[30px]">
+                <div className={"flex flex-col gap-[20px]"}>
+                    <div className={"flex gap-[20px] items-center"}>
+                        <div className={"font-medium text-[22px]"}>
+                            {item.name}
+                        </div>
+                        {categoryName ? (
+                            <div className="px-[25px] py-[5px] rounded-[6px] border border-slate-200 text-[14px]">
+                                {categoryName}
+                            </div>
+                        ) : null}
+                    </div>
+                    {item.description ? (
+                        <div className="text-zinc-400 text-[18px]">
+                            {item.description}
+                        </div>
+                    ) : null}
+                </div>
+                <div className={"flex gap-[20px] items-center"}>
+                    <button
+                        onClick={handleSwitchEditModal}
+                        className="border border-zinc-400 rounded-[8px] w-[40px] h-[40px]"
+                    >
+                        <img className="m-auto" src={edit} alt={"edit"} />
+                    </button>
+                    <button
+                        onClick={handleSwitchRemoveModal}
+                        className="border border-zinc-400 rounded-[8px] w-[40px] h-[40px]"
+                    >
+                        <img className="m-auto" src={remove} alt={"remove"} />
+                    </button>
+                </div>
             </li>
         </>
     )
+
+    // return (
+    //     <>
+    //         <li className="list-item">
+    //             <div className="list-item-col1">
+    //                 <div className="list-item-col1-row1">
+    //                     <h3 className="list-item-col1-row1__title">
+    //                         {item.name}
+    //                     </h3>
+    //                     {item.category && (
+    //                         <span className="list-item-col1-row1__category">
+    //                             {
+    //                                 categories.find(
+    //                                     (category) =>
+    //                                         category.id === item.category,
+    //                                 )?.name
+    //                             }
+    //                         </span>
+    //                     )}
+    //                 </div>
+    //                 <div className="list-item-col1-row2">
+    //                     {item.description}
+    //                 </div>
+    //             </div>
+    //             <div className="list-item-col2">
+    //                 <button
+    //                     className="list-item-col2__btn"
+    //                     onClick={handleSwitchEditModal}
+    //                 >
+    //                     <img src={edit} alt="edit" />
+    //                 </button>
+    //                 <button
+    //                     className="list-item-col2__btn"
+    //                     onClick={handleSwitchRemoveModal}
+    //                 >
+    //                     <img src={remove} alt="remove" />
+    //                 </button>
+    //             </div>
+    //             <Modal
+    //                 name={"Редактирование"}
+    //                 active={editModalActive}
+    //                 setActive={setEditModalActive}
+    //                 buttonUnavailable
+    //             >
+    //                 <EditItem setModal={setEditModalActive} item={item} />
+    //             </Modal>
+    //
+    //             <Modal
+    //                 name={"Удаление"}
+    //                 active={removeModalActive}
+    //                 setActive={setRemoveModalActive}
+    //             >
+    //                 <RemoveItem setModal={setRemoveModalActive} item={item} />
+    //             </Modal>
+    //         </li>
+    //     </>
 }

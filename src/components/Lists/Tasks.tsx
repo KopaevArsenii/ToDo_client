@@ -61,7 +61,7 @@ export const Tasks: React.FC = () => {
                 />
                 <button onClick={handleClearFilters}>Очистить</button>
             </div>
-            <ul>
+            <ul className="max-w-[1440px] mx-auto bg-white flex flex-col gap-[30px]">
                 {viewList.map((task) => (
                     <ListItem key={task.id} item={task} />
                 ))}
