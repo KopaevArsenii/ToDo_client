@@ -48,13 +48,11 @@ export const Tasks: React.FC = () => {
             <div className={"flex gap-[30px]"}>
                 <Input
                     value={search}
-                    label={"Название задачи"}
                     placeholder={"Введите назавние задачи"}
                     setValue={setSearch}
                 />
                 <Select
                     value={category}
-                    label={"Категория"}
                     placeholder={"Введите назавние категории"}
                     setValue={setCategory}
                 />

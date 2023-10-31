@@ -13,11 +13,10 @@ export const Textarea: React.FC<ModalTextareaProps> = ({
     setValue,
 }) => {
     return (
-        <div className="modaltextarea-wrapper">
-            <label htmlFor="modaltextarea">{label}</label>
+        <div className="flex flex-col gap-[10px]">
+            {label && <div className="text-[14px] text-zinc-400">{label}</div>}
             <textarea
-                id="modaltextarea"
-                className="modaltextarea"
+                className="p-[20px] border border-slate-200 hover:border-indigo-500 outline-none rounded-[10px] h-[200px] resize-none"
                 placeholder={placeholder}
                 value={value}
                 onChange={(e) => setValue(e.target.value)}

@@ -45,7 +45,7 @@ export const Header = () => {
                     </NavLink>
                 </nav>
                 <button
-                    className="bg-indigo-500 text-white w-[300px] h-[60px] rounded-[10px] text-[22px] font-medium"
+                    className="button button-indigo h-[64px] max-w-[300px]"
                     onClick={handleSwitchCreateModal}
                 >
                     {isCategories ? "Добавить категорию" : "Добавить задачу"}

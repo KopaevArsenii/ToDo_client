@@ -41,12 +41,20 @@ export const RemoveItem: React.FC<ModalRemoveItemProps> = ({
     }
 
     return (
-        <form onSubmit={onSubmit}>
-            <div>{text}</div>
-            <button type="submit">Подтвердить</button>
-            <button onClick={handleCancel} type="button">
-                Отмена
-            </button>
+        <form className="flex flex-col gap-[30px]" onSubmit={onSubmit}>
+            <div className="text-[22px]">{text}</div>
+            <div className="flex gap-[30px] h-[64px]">
+                <button
+                    className="button button-default"
+                    onClick={handleCancel}
+                    type="button"
+                >
+                    Отмена
+                </button>
+                <button className="button button-red" type="submit">
+                    Подтвердить
+                </button>
+            </div>
         </form>
     )
 }

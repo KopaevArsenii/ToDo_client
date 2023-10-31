@@ -45,7 +45,7 @@ export const CreateItem: React.FC<CreateItemProps> = ({ setModal }) => {
     }
 
     return (
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} className="flex flex-col gap-[30px]">
             {isCategories ? (
                 <Input
                     value={name}
@@ -54,7 +54,7 @@ export const CreateItem: React.FC<CreateItemProps> = ({ setModal }) => {
                     setValue={setName}
                 />
             ) : (
-                <div className="modal__content_row">
+                <div className="flex gap-[30px]">
                     <Input
                         value={name}
                         label={"Название"}
@@ -75,10 +75,18 @@ export const CreateItem: React.FC<CreateItemProps> = ({ setModal }) => {
                 placeholder={"Введите описание"}
                 setValue={setDescription}
             />
-            <button type="submit">Подтвердить</button>
-            <button onClick={handleCancel} type="button">
-                Отмена
-            </button>
+            <div className="flex gap-[30px] h-[64px]">
+                <button
+                    className="button button-default"
+                    onClick={handleCancel}
+                    type="button"
+                >
+                    Отмена
+                </button>
+                <button className="button button-indigo" type="submit">
+                    Подтвердить
+                </button>
+            </div>
         </form>
     )
 }

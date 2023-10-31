@@ -4,6 +4,23 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+    .button {
+        @apply w-full rounded-[10px] text-[22px] font-medium
+    }
+}
+
+@layer utilities {
+    .button-red {
+        @apply bg-red-500 hover:bg-red-600 text-white
+    }
+    .button-default {
+        @apply bg-zinc-200 hover:bg-zinc-300 text-black
+    }
+    .button-indigo {
+        @apply bg-indigo-500 hover:bg-indigo-600 text-white
+    }
+}
 * {
     font-family: "Roboto", sans-serif;
 }
