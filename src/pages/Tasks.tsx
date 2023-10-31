@@ -8,6 +8,7 @@ import React, { useState } from "react"
 import { Select } from "../ui/Select"
 import { Input } from "../ui/Input"
 import close from "../icons/close.svg"
+import NothingFound from "../components/NothingFound"
 
 export const Tasks: React.FC = () => {
     const tasks = useSelector(getAllTasks)
@@ -67,7 +68,9 @@ export const Tasks: React.FC = () => {
                 {viewList.map((task) => (
                     <ListItem key={task.id} item={task} />
                 ))}
-                {viewList.length === 0 && <div>Ничего не найдено!</div>}
+                {viewList.length === 0 && (
+                    <NothingFound text={"К сожалению, ничего не найдено =("} />
+                )}
             </ul>
         </div>
     )

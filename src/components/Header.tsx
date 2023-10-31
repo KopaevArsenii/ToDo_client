@@ -21,7 +21,7 @@ export const Header = () => {
         <>
             <header className="w-full flex max-w-[1440px] py-[30px] mx-auto items-center gap-[100px]">
                 <img className="w-[60px] h-[60px]" src={logo} alt="logo" />
-                <nav className="w-full flex gap-[10px]">
+                <nav className="w-full flex gap-[30px]">
                     <NavLink
                         to={"/tasks"}
                         className={({ isActive }) =>
