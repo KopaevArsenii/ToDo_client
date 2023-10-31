@@ -9,8 +9,6 @@ import { Select } from "../ui/Select"
 import { Input } from "../ui/Input"
 import close from "../icons/close.svg"
 
-import "../components/Modal/Modal.css"
-
 export const Tasks: React.FC = () => {
     const tasks = useSelector(getAllTasks)
 

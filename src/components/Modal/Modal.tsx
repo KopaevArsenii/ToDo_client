@@ -2,8 +2,6 @@
 import React from "react"
 
 /* APPLICATION */
-import "./Modal.css"
-import close from "../../icons/close.svg"
 
 interface ModalProps {
     name: string
@@ -22,7 +20,9 @@ export const Modal: React.FC<ModalProps> = ({
 }) => {
     return (
         <div
-            className={active ? "modal active" : "modal"}
+            className={`bg-black/30 h-full z-10 w-full fixed top-0 left-0 flex items-center justify-center ${
+                active ? "" : "hidden"
+            }`}
             onClick={
                 !buttonUnavailable
                     ? () => {
@@ -32,19 +32,11 @@ export const Modal: React.FC<ModalProps> = ({
             }
         >
             <div
-                className="modal__content"
+                className="bg-white px-[60px] py-[40px] rounded-[16px] w-[770px]"
                 onClick={(e) => e.stopPropagation()}
             >
-                <div className={"modal__content-header"}>
-                    <div className={"modal__content-title "}>{name}</div>
-                    {!buttonUnavailable && (
-                        <button
-                            onClick={() => setActive(false)}
-                            className={"modal__content-header__btn"}
-                        >
-                            <img src={close} alt="close" />
-                        </button>
-                    )}
+                <div className="flex pb-[30px]">
+                    <div className="font-medium text-[22px]">{name}</div>
                 </div>
                 {children}
             </div>
