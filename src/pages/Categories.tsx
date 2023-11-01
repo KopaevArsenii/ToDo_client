@@ -2,7 +2,7 @@
 import { useSelector } from "react-redux"
 
 /* APPLICATION */
-import { ListItem } from "../components/ListItem"
+import CategoryListItem from "../components/CategoryListItem"
 import { getAllCategories } from "../features/categoriesSlice"
 import NothingFound from "../components/NothingFound"
 
@@ -12,7 +12,7 @@ export const Categories = () => {
     return (
         <ul className="max-w-[1440px] mx-auto bg-white flex flex-col gap-[30px] mt-[60px]">
             {categories.map((category) => (
-                <ListItem key={category.id} item={category} />
+                <CategoryListItem key={category.id} item={category} />
             ))}
             {categories.length === 0 && (
                 <NothingFound text="Нет ни одной категории? Создайте!" />

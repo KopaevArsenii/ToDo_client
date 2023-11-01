@@ -1,10 +1,10 @@
 /* VENDOR */
+import React, { useState } from "react"
 import { useSelector } from "react-redux"
 
 /* APPLICATION */
-import { ListItem } from "../components/ListItem"
+import TaskListItem from "../components/TaskListItem"
 import { getAllTasks } from "../features/tasksSlice"
-import React, { useState } from "react"
 import { Select } from "../ui/Select"
 import { Input } from "../ui/Input"
 import close from "../icons/close.svg"
@@ -66,7 +66,7 @@ export const Tasks: React.FC = () => {
             </div>
             <ul className="flex flex-col gap-[30px]">
                 {viewList.map((task) => (
-                    <ListItem key={task.id} item={task} />
+                    <TaskListItem key={task.id} item={task} />
                 ))}
                 {viewList.length === 0 && (
                     <NothingFound text={"К сожалению, ничего не найдено =("} />
