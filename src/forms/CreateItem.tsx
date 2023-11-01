@@ -52,6 +52,7 @@ export const CreateItem: React.FC<CreateItemProps> = ({ setModal }) => {
                     label={"Название"}
                     placeholder={"Введите название"}
                     setValue={setName}
+                    required
                 />
             ) : (
                 <div className="flex gap-[30px]">
@@ -60,6 +61,7 @@ export const CreateItem: React.FC<CreateItemProps> = ({ setModal }) => {
                         label={"Название"}
                         placeholder={"Введите название"}
                         setValue={setName}
+                        required
                     />
                     <Select
                         value={category}

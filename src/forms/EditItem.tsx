@@ -52,6 +52,7 @@ export const EditItem: React.FC<EditItemProps> = ({ item, setModal }) => {
                     label={"Название"}
                     placeholder={"Введите название"}
                     setValue={setName}
+                    required
                 />
             ) : (
                 <div className={"flex gap-[30px]"}>
@@ -60,6 +61,7 @@ export const EditItem: React.FC<EditItemProps> = ({ item, setModal }) => {
                         label={"Название"}
                         placeholder={"Введите название"}
                         setValue={setName}
+                        required
                     />
                     <Select
                         value={category}
