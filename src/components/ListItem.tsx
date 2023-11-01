@@ -1,5 +1,5 @@
 /* VENDOR */
-import { useState } from "react"
+import { useState, FC } from "react"
 import { useSelector } from "react-redux"
 
 /* APPLICATION */
@@ -19,7 +19,7 @@ interface ListItemProps {
     }
 }
 
-export const ListItem: React.FC<ListItemProps> = ({ item }) => {
+export const ListItem: FC<ListItemProps> = ({ item }) => {
     const categories = useSelector(getAllCategories)
     const [editModalActive, setEditModalActive] = useState<boolean>(false)
     const [removeModalActive, setRemoveModalActive] = useState<boolean>(false)

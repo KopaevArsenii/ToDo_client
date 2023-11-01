@@ -1,5 +1,5 @@
 /* VENDOR */
-import { useState } from "react"
+import { FC, useState } from "react"
 import { NavLink, useLocation } from "react-router-dom"
 
 /* APPLICATION */
@@ -7,10 +7,11 @@ import { CreateItem } from "../forms/CreateItem"
 import { Modal } from "./Modal"
 import logo from "../icons/logo.svg"
 
-export const Header = () => {
-    const { pathname } = useLocation(),
-        isCategories = pathname.includes("categories"),
-        [createModalActive, setCreateModalActive] = useState<boolean>(false)
+export const Header: FC = () => {
+    const { pathname } = useLocation()
+    const [createModalActive, setCreateModalActive] = useState<boolean>(false)
+
+    const isCategories = pathname.includes("categories")
     const handleSwitchCreateModal = (
         e: React.MouseEvent<HTMLButtonElement>,
     ) => {

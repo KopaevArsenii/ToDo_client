@@ -1,4 +1,5 @@
 /* VENDOR */
+import { FC } from "react"
 import { Route, Routes, Navigate } from "react-router-dom"
 
 /* APPLICATION */
@@ -6,7 +7,7 @@ import { Header } from "./Header"
 import { Tasks } from "../pages/Tasks"
 import { Categories } from "../pages/Categories"
 
-function App() {
+const App: FC = () => {
     return (
         <div className="App">
             <Header />

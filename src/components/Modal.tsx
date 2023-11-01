@@ -1,5 +1,5 @@
 /* VENDOR */
-import React from "react"
+import React, { FC } from "react"
 
 /* APPLICATION */
 
@@ -11,25 +11,23 @@ interface ModalProps {
     buttonUnavailable?: boolean
 }
 
-export const Modal: React.FC<ModalProps> = ({
+export const Modal: FC<ModalProps> = ({
     active,
     setActive,
     name,
     children,
     buttonUnavailable = false,
 }) => {
+    const handleCloseModal = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (buttonUnavailable) return
+        setActive(false)
+    }
     return (
         <div
             className={`bg-black/30 h-full z-10 w-full fixed top-0 left-0 flex items-center justify-center ${
                 active ? "" : "hidden"
             }`}
-            onClick={
-                !buttonUnavailable
-                    ? () => {
-                          setActive(false)
-                      }
-                    : () => {}
-            }
+            onClick={handleCloseModal}
         >
             <div
                 className="bg-white px-[60px] py-[40px] rounded-[16px] w-[770px]"
