@@ -4,15 +4,12 @@ import edit from "../icons/edit.svg"
 import remove from "../icons/remove.svg"
 import EditCategory from "../forms/EditCategory"
 import RemoveCategory from "../forms/RemoveCategory"
+import { ICategory } from "../types"
 
 interface CategoryListItemProps {
-    item: {
-        id: string
-        name: string
-        description: string
-    }
+    category: ICategory
 }
-const CategoryListItem: FC<CategoryListItemProps> = ({ item }) => {
+const CategoryListItem: FC<CategoryListItemProps> = ({ category }) => {
     const [editModalActive, setEditModalActive] = useState<boolean>(false)
     const [removeModalActive, setRemoveModalActive] = useState<boolean>(false)
 
@@ -29,7 +26,10 @@ const CategoryListItem: FC<CategoryListItemProps> = ({ item }) => {
                 setActive={setEditModalActive}
                 buttonUnavailable
             >
-                <EditCategory item={item} setModal={setEditModalActive} />
+                <EditCategory
+                    category={category}
+                    setModal={setEditModalActive}
+                />
             </Modal>
 
             <Modal
@@ -37,19 +37,22 @@ const CategoryListItem: FC<CategoryListItemProps> = ({ item }) => {
                 active={removeModalActive}
                 setActive={setRemoveModalActive}
             >
-                <RemoveCategory setModal={setRemoveModalActive} item={item} />
+                <RemoveCategory
+                    setModal={setRemoveModalActive}
+                    category={category}
+                />
             </Modal>
 
             <li className="w-full py-[30px] px-[40px] flex justify-between border border-slate-200 rounded-[30px]">
                 <div className={"flex flex-col gap-[20px]"}>
                     <div className={"flex gap-[20px] items-center"}>
                         <div className={"font-medium text-[22px]"}>
-                            {item.name}
+                            {category.name}
                         </div>
                     </div>
-                    {item.description ? (
+                    {category.description ? (
                         <div className="text-zinc-400 text-[18px]">
-                            {item.description}
+                            {category.description}
                         </div>
                     ) : null}
                 </div>

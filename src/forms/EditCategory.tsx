@@ -4,25 +4,22 @@ import { useDispatch } from "react-redux"
 import { updateCategory } from "../features/categoriesSlice"
 import { Input } from "../ui/Input"
 import { Textarea } from "../ui/Textarea"
+import { ICategory } from "../types"
 
-interface EditItemProps {
-    item: {
-        id: string
-        name: string
-        description: string
-    }
+interface EditCategoryProps {
+    category: ICategory
     setModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const EditCategory: FC<EditItemProps> = ({ item, setModal }) => {
+const EditCategory: FC<EditCategoryProps> = ({ category, setModal }) => {
     const dispatch = useDispatch()
-    const [name, setName] = useState<string>(item.name)
-    const [description, setDescription] = useState<string>(item.description)
+    const [name, setName] = useState<string>(category.name)
+    const [description, setDescription] = useState<string>(category.description)
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (name === "") return
-        dispatch(updateCategory({ id: item.id, name, description }))
+        dispatch(updateCategory({ id: category.id, name, description }))
         setModal(false)
     }
 

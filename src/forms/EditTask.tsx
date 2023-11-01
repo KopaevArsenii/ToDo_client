@@ -5,28 +5,23 @@ import { updateTask } from "../features/tasksSlice"
 import { Input } from "../ui/Input"
 import { Select } from "../ui/Select"
 import { Textarea } from "../ui/Textarea"
+import { ITask } from "../types"
 
 interface EditTaskProps {
-    item: {
-        id: string
-        name: string
-        description: string
-        category: string
-        done: boolean
-    }
+    task: ITask
     setModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const EditTask: FC<EditTaskProps> = ({ item, setModal }) => {
+const EditTask: FC<EditTaskProps> = ({ task, setModal }) => {
     const dispatch = useDispatch()
-    const [name, setName] = useState<string>(item.name)
-    const [category, setCategory] = useState<string>(item.category)
-    const [description, setDescription] = useState<string>(item.description)
+    const [name, setName] = useState<string>(task.name)
+    const [category, setCategory] = useState<string>(task.category)
+    const [description, setDescription] = useState<string>(task.description)
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (name === "") return
-        dispatch(updateTask({ id: item.id, name, description, category }))
+        dispatch(updateTask({ id: task.id, name, description, category }))
         setModal(false)
     }
 

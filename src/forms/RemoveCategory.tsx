@@ -5,23 +5,23 @@ import { useDispatch } from "react-redux"
 import { clearTaskCategory } from "../features/tasksSlice"
 import { deleteCategory } from "../features/categoriesSlice"
 import React from "react"
+import { ICategory } from "../types"
 
-interface ModalRemoveItemProps {
-    item: {
-        id: string
-        name: string
-        description: string
-    }
+interface RemoveCategoryProps {
+    category: ICategory
     setModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const RemoveCategory: React.FC<ModalRemoveItemProps> = ({ item, setModal }) => {
+const RemoveCategory: React.FC<RemoveCategoryProps> = ({
+    category,
+    setModal,
+}) => {
     const dispatch = useDispatch()
-    const text = `Вы уверены, что хотите удалить категорию "${item.name}"?`
+    const text = `Вы уверены, что хотите удалить категорию "${category.name}"?`
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        dispatch(deleteCategory(item.id))
-        dispatch(clearTaskCategory(item.id))
+        dispatch(deleteCategory(category.id))
+        dispatch(clearTaskCategory(category.id))
         setModal(false)
     }
 

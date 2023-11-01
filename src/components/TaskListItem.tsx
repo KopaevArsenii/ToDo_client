@@ -12,18 +12,13 @@ import { setTaskDone } from "../features/tasksSlice"
 import { useAppDispatch } from "../redux/hooks"
 import EditTask from "../forms/EditTask"
 import RemoveTask from "../forms/RemoveTask"
+import { ITask } from "../types"
 
 interface TaskListItemProps {
-    item: {
-        id: string
-        name: string
-        description: string
-        category: string
-        done: boolean
-    }
+    task: ITask
 }
 
-const TaskListItem: FC<TaskListItemProps> = ({ item }) => {
+const TaskListItem: FC<TaskListItemProps> = ({ task }) => {
     const dispatch = useAppDispatch()
     const categories = useSelector(getAllCategories)
     const [editModalActive, setEditModalActive] = useState<boolean>(false)
@@ -41,7 +36,7 @@ const TaskListItem: FC<TaskListItemProps> = ({ item }) => {
     }
 
     const categoryName = categories.find(
-        (category) => category.id === item.category,
+        (category) => category.id === task.category,
     )?.name
 
     return (
@@ -52,7 +47,7 @@ const TaskListItem: FC<TaskListItemProps> = ({ item }) => {
                 setActive={setEditModalActive}
                 buttonUnavailable
             >
-                <EditTask item={item} setModal={setEditModalActive} />
+                <EditTask task={task} setModal={setEditModalActive} />
             </Modal>
 
             <Modal
@@ -60,18 +55,18 @@ const TaskListItem: FC<TaskListItemProps> = ({ item }) => {
                 active={removeModalActive}
                 setActive={setRemoveModalActive}
             >
-                <RemoveTask setModal={setRemoveModalActive} item={item} />
+                <RemoveTask setModal={setRemoveModalActive} task={task} />
             </Modal>
 
             <li
                 className={`w-full py-[30px] px-[40px] flex justify-between border border-slate-200 rounded-[30px] ${
-                    item.done ? "text-black/30" : ""
+                    task.done ? "text-black/30" : ""
                 }`}
             >
                 <div className={"flex flex-col gap-[20px]"}>
                     <div className={"flex gap-[20px] items-center"}>
                         <div className={"font-medium text-[22px]"}>
-                            {item.name}
+                            {task.name}
                         </div>
                         {categoryName ? (
                             <div className="px-[25px] py-[5px] rounded-[6px] border border-slate-200 text-[14px]">
@@ -79,20 +74,20 @@ const TaskListItem: FC<TaskListItemProps> = ({ item }) => {
                             </div>
                         ) : null}
                     </div>
-                    {item.description ? (
+                    {task.description ? (
                         <div
                             className={`${
-                                item.done ? "text-zinc-400/50" : "text-zinc-400"
+                                task.done ? "text-zinc-400/50" : "text-zinc-400"
                             } text-[18px]`}
                         >
-                            {item.description}
+                            {task.description}
                         </div>
                     ) : null}
                 </div>
                 <div className={"flex gap-[20px] items-center"}>
                     <Checkbox
-                        isChecked={item.done}
-                        onClick={(e) => handleSwitchTaskDone(e, item.id)}
+                        isChecked={task.done}
+                        onClick={(e) => handleSwitchTaskDone(e, task.id)}
                     />
                     <button
                         onClick={handleSwitchEditModal}

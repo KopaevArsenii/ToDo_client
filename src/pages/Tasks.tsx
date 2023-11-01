@@ -66,7 +66,7 @@ export const Tasks: React.FC = () => {
             </div>
             <ul className="flex flex-col gap-[30px]">
                 {viewList.map((task) => (
-                    <TaskListItem key={task.id} item={task} />
+                    <TaskListItem key={task.id} task={task} />
                 ))}
                 {viewList.length === 0 && (
                     <NothingFound text={"К сожалению, ничего не найдено =("} />

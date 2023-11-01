@@ -4,14 +4,7 @@ import { v4 as uuidv4 } from "uuid"
 
 /* APPLICATION */
 import { RootState } from "../redux/store"
-
-export interface ITask {
-    id: string
-    name: string
-    description: string
-    category: string
-    done: boolean
-}
+import { ITask } from "../types"
 
 export interface ICreateTask {
     name: string

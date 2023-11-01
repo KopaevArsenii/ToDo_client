@@ -12,7 +12,7 @@ export const Categories = () => {
     return (
         <ul className="max-w-[1440px] mx-auto bg-white flex flex-col gap-[30px] mt-[60px]">
             {categories.map((category) => (
-                <CategoryListItem key={category.id} item={category} />
+                <CategoryListItem key={category.id} category={category} />
             ))}
             {categories.length === 0 && (
                 <NothingFound text="Нет ни одной категории? Создайте!" />

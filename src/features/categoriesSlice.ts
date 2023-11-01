@@ -4,12 +4,7 @@ import { v4 as uuidv4 } from "uuid"
 
 /* APPLICATION */
 import { RootState } from "../redux/store"
-
-export interface ICategory {
-    id: string
-    name: string
-    description: string
-}
+import { ICategory } from "../types"
 
 export interface ICreateCategory {
     name: string
