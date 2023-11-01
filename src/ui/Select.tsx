@@ -49,7 +49,7 @@ export const Select: React.FC<SelectProps> = ({
                     ></div>
                 )}
                 {isActive && (
-                    <div className="top-[80px] left-0 bg-white w-full absolute z-10 rounded-[10px] border border-slate-200 text-[18px]">
+                    <div className="top-[80px] left-0 bg-white w-full absolute z-10 rounded-[10px] border border-slate-200 text-[18px] overflow-y-auto max-h-[239px]">
                         {options.map((option) => (
                             <div
                                 className="cursor-pointer truncate hover:text-white border-b border-slate-200  hover:bg-indigo-500 first:rounded-t-[10px] last:rounded-b-[10px] last:border-0 px-[20px] py-[10px]"
