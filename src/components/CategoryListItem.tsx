@@ -1,9 +1,9 @@
 import React, { FC, useState } from "react"
 import { Modal } from "./Modal"
-import { EditItem } from "../forms/EditItem"
 import { RemoveItem } from "../forms/RemoveItem"
 import edit from "../icons/edit.svg"
 import remove from "../icons/remove.svg"
+import EditCategory from "../forms/EditCategory"
 
 interface CategoryListItemProps {
     item: {
@@ -29,7 +29,7 @@ const CategoryListItem: FC<CategoryListItemProps> = ({ item }) => {
                 setActive={setEditModalActive}
                 buttonUnavailable
             >
-                <EditItem setModal={setEditModalActive} item={item} />
+                <EditCategory item={item} setModal={setEditModalActive} />
             </Modal>
 
             <Modal

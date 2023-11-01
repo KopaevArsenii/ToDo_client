@@ -3,9 +3,10 @@ import { FC, useState } from "react"
 import { NavLink, useLocation } from "react-router-dom"
 
 /* APPLICATION */
-import { CreateItem } from "../forms/CreateItem"
 import { Modal } from "./Modal"
 import logo from "../icons/logo.svg"
+import CreateCategory from "../forms/CreateCategory"
+import CreateTask from "../forms/CreateTask"
 
 export const Header: FC = () => {
     const { pathname } = useLocation()
@@ -55,7 +56,11 @@ export const Header: FC = () => {
                     active={createModalActive}
                     setActive={setCreateModalActive}
                 >
-                    <CreateItem setModal={setCreateModalActive} />
+                    {pathname.includes("categories") ? (
+                        <CreateCategory setModal={setCreateModalActive} />
+                    ) : (
+                        <CreateTask setModal={setCreateModalActive} />
+                    )}
                 </Modal>
             </header>
             <div className="h-[1px] bg-slate-200 w-full"></div>
