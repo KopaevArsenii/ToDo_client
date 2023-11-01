@@ -1,6 +1,8 @@
+/* VENDOR */
 import React, { FC, useState } from "react"
-import { useDispatch } from "react-redux"
+import { useAppDispatch } from "../redux/hooks"
 
+/* APPLICATION */
 import { addCategory } from "../features/categoriesSlice"
 import { Input } from "../ui/Input"
 import { Textarea } from "../ui/Textarea"
@@ -10,7 +12,7 @@ interface CreateCategoryProps {
 }
 
 const CreateCategory: FC<CreateCategoryProps> = ({ setModal }) => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const [name, setName] = useState<string>("")
     const [description, setDescription] = useState<string>("")
 

@@ -1,8 +1,6 @@
 /* VENDOR */
 import React, { FC } from "react"
 
-/* APPLICATION */
-
 interface ModalProps {
     name: string
     active: boolean
@@ -11,7 +9,7 @@ interface ModalProps {
     buttonUnavailable?: boolean
 }
 
-export const Modal: FC<ModalProps> = ({
+const Modal: FC<ModalProps> = ({
     active,
     setActive,
     name,
@@ -41,3 +39,5 @@ export const Modal: FC<ModalProps> = ({
         </div>
     )
 }
+
+export default Modal

@@ -1,10 +1,9 @@
 /* VENDOR */
 import React, { useState } from "react"
-import { useSelector } from "react-redux"
+import { useAppSelector } from "../redux/hooks"
 
 /* APPLICATION */
 import down from "../icons/down.svg"
-// import "./Select/Select.css"
 import { getAllCategories } from "../features/categoriesSlice"
 
 interface SelectProps {
@@ -22,7 +21,7 @@ export const Select: React.FC<SelectProps> = ({
     setValue,
 }) => {
     const [isActive, setIsActive] = useState<boolean>(false)
-    const options = useSelector(getAllCategories)
+    const options = useAppSelector(getAllCategories)
 
     return (
         <div className="flex flex-col gap-[10px] w-full">

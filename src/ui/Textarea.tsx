@@ -1,4 +1,3 @@
-// import "./Textarea/Textarea.css"
 interface ModalTextareaProps {
     value: string
     label: string

@@ -1,5 +1,7 @@
+/* VENDOR */
 import React, { FC, MouseEventHandler } from "react"
 
+/* APPLICATION */
 import check from "../icons/check.svg"
 
 interface CheckboxProps {

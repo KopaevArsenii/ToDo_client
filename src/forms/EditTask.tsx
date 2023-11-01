@@ -1,6 +1,8 @@
+/* VENDOR */
 import React, { FC, useState } from "react"
-import { useDispatch } from "react-redux"
+import { useAppDispatch } from "../redux/hooks"
 
+/* APPLICATION */
 import { updateTask } from "../features/tasksSlice"
 import { Input } from "../ui/Input"
 import { Select } from "../ui/Select"
@@ -13,7 +15,7 @@ interface EditTaskProps {
 }
 
 const EditTask: FC<EditTaskProps> = ({ task, setModal }) => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const [name, setName] = useState<string>(task.name)
     const [category, setCategory] = useState<string>(task.category)
     const [description, setDescription] = useState<string>(task.description)

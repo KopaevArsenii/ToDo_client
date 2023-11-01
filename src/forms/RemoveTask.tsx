@@ -1,9 +1,9 @@
 /* VENDOR */
-import { useDispatch } from "react-redux"
+import React from "react"
+import { useAppDispatch } from "../redux/hooks"
 
 /* APPLICATION */
 import { deleteTask } from "../features/tasksSlice"
-import React from "react"
 import { ITask } from "../types"
 
 interface RemoveTaskProps {
@@ -12,7 +12,7 @@ interface RemoveTaskProps {
 }
 
 const RemoveTask: React.FC<RemoveTaskProps> = ({ task, setModal }) => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const text = `Вы уверены, что хотите удалить задачу "${task.name}"?`
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {

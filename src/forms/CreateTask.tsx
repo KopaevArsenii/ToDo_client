@@ -1,6 +1,8 @@
+/* VENDOR */
 import React, { FC, useState } from "react"
-import { useDispatch } from "react-redux"
+import { useAppDispatch } from "../redux/hooks"
 
+/* APPLICATION */
 import { addTask } from "../features/tasksSlice"
 import { Input } from "../ui/Input"
 import { Select } from "../ui/Select"
@@ -10,7 +12,7 @@ interface CreateTaskProps {
     setModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 const CreateTask: FC<CreateTaskProps> = ({ setModal }) => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const [name, setName] = useState<string>("")
     const [category, setCategory] = useState<string>("")
     const [description, setDescription] = useState<string>("")

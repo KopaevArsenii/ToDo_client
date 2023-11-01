@@ -1,5 +1,7 @@
+/* VENDOR */
 import { FC } from "react"
 
+/* APPLICATION */
 import cute from "../icons/cute.png"
 
 interface NothingFoundProps {

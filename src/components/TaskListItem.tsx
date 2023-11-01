@@ -1,17 +1,17 @@
 /* VENDOR */
 import React, { FC, useState } from "react"
-import { useSelector } from "react-redux"
+import { useAppDispatch } from "../redux/hooks"
+import { useAppSelector } from "../redux/hooks"
 
 /* APPLICATION */
-import { getAllCategories } from "../features/categoriesSlice"
-import { Modal } from "./Modal"
-import edit from "../icons/edit.svg"
-import remove from "../icons/remove.svg"
+import Modal from "./Modal"
 import Checkbox from "../ui/Checkbox"
 import { setTaskDone } from "../features/tasksSlice"
-import { useAppDispatch } from "../redux/hooks"
+import { getAllCategories } from "../features/categoriesSlice"
 import EditTask from "../forms/EditTask"
 import RemoveTask from "../forms/RemoveTask"
+import edit from "../icons/edit.svg"
+import remove from "../icons/remove.svg"
 import { ITask } from "../types"
 
 interface TaskListItemProps {
@@ -20,7 +20,7 @@ interface TaskListItemProps {
 
 const TaskListItem: FC<TaskListItemProps> = ({ task }) => {
     const dispatch = useAppDispatch()
-    const categories = useSelector(getAllCategories)
+    const categories = useAppSelector(getAllCategories)
     const [editModalActive, setEditModalActive] = useState<boolean>(false)
     const [removeModalActive, setRemoveModalActive] = useState<boolean>(false)
 

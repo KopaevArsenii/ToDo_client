@@ -3,7 +3,7 @@ import { FC, useState } from "react"
 import { NavLink, useLocation } from "react-router-dom"
 
 /* APPLICATION */
-import { Modal } from "./Modal"
+import Modal from "./Modal"
 import logo from "../icons/logo.svg"
 import CreateCategory from "../forms/CreateCategory"
 import CreateTask from "../forms/CreateTask"

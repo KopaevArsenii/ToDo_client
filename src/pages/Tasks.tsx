@@ -1,17 +1,17 @@
 /* VENDOR */
 import React, { useState } from "react"
-import { useSelector } from "react-redux"
+import { useAppSelector } from "../redux/hooks"
 
 /* APPLICATION */
 import TaskListItem from "../components/TaskListItem"
+import NothingFound from "../components/NothingFound"
 import { getAllTasks } from "../features/tasksSlice"
 import { Select } from "../ui/Select"
 import { Input } from "../ui/Input"
 import close from "../icons/close.svg"
-import NothingFound from "../components/NothingFound"
 
 export const Tasks: React.FC = () => {
-    const tasks = useSelector(getAllTasks)
+    const tasks = useAppSelector(getAllTasks)
 
     const [search, setSearch] = useState<string>("")
     const [category, setCategory] = useState<string>("")

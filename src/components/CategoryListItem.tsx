@@ -1,9 +1,12 @@
+/* VENDOR */
 import React, { FC, useState } from "react"
-import { Modal } from "./Modal"
-import edit from "../icons/edit.svg"
-import remove from "../icons/remove.svg"
+
+/* APPLICATION */
+import Modal from "./Modal"
 import EditCategory from "../forms/EditCategory"
 import RemoveCategory from "../forms/RemoveCategory"
+import edit from "../icons/edit.svg"
+import remove from "../icons/remove.svg"
 import { ICategory } from "../types"
 
 interface CategoryListItemProps {
