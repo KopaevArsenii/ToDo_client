@@ -10,7 +10,7 @@ export const Categories = () => {
     const categories = useAppSelector(getAllCategories)
 
     return (
-        <ul className="max-w-[1440px] mx-auto bg-white flex flex-col gap-[30px] mt-[60px]">
+        <ul className="max-w-[1440px] mx-auto bg-white flex flex-col gap-[30px] py-[30px]">
             {categories.map((category) => (
                 <CategoryListItem key={category.id} category={category} />
             ))}
