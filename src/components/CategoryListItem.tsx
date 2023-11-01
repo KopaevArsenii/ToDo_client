@@ -1,9 +1,9 @@
 import React, { FC, useState } from "react"
 import { Modal } from "./Modal"
-import { RemoveItem } from "../forms/RemoveItem"
 import edit from "../icons/edit.svg"
 import remove from "../icons/remove.svg"
 import EditCategory from "../forms/EditCategory"
+import RemoveCategory from "../forms/RemoveCategory"
 
 interface CategoryListItemProps {
     item: {
@@ -37,7 +37,7 @@ const CategoryListItem: FC<CategoryListItemProps> = ({ item }) => {
                 active={removeModalActive}
                 setActive={setRemoveModalActive}
             >
-                <RemoveItem setModal={setRemoveModalActive} item={item} />
+                <RemoveCategory setModal={setRemoveModalActive} item={item} />
             </Modal>
 
             <li className="w-full py-[30px] px-[40px] flex justify-between border border-slate-200 rounded-[30px]">

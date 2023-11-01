@@ -5,13 +5,13 @@ import { useSelector } from "react-redux"
 /* APPLICATION */
 import { getAllCategories } from "../features/categoriesSlice"
 import { Modal } from "./Modal"
-import { RemoveItem } from "../forms/RemoveItem"
 import edit from "../icons/edit.svg"
 import remove from "../icons/remove.svg"
 import Checkbox from "../ui/Checkbox"
 import { setTaskDone } from "../features/tasksSlice"
 import { useAppDispatch } from "../redux/hooks"
 import EditTask from "../forms/EditTask"
+import RemoveTask from "../forms/RemoveTask"
 
 interface TaskListItemProps {
     item: {
@@ -60,7 +60,7 @@ const TaskListItem: FC<TaskListItemProps> = ({ item }) => {
                 active={removeModalActive}
                 setActive={setRemoveModalActive}
             >
-                <RemoveItem setModal={setRemoveModalActive} item={item} />
+                <RemoveTask setModal={setRemoveModalActive} item={item} />
             </Modal>
 
             <li

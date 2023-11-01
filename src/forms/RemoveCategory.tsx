@@ -1,9 +1,8 @@
 /* VENDOR */
 import { useDispatch } from "react-redux"
-import { useLocation } from "react-router-dom"
 
 /* APPLICATION */
-import { deleteTask, clearTaskCategory } from "../features/tasksSlice"
+import { clearTaskCategory } from "../features/tasksSlice"
 import { deleteCategory } from "../features/categoriesSlice"
 import React from "react"
 
@@ -12,27 +11,17 @@ interface ModalRemoveItemProps {
         id: string
         name: string
         description: string
-        category?: string
     }
     setModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const RemoveItem: React.FC<ModalRemoveItemProps> = ({
-    item,
-    setModal,
-}) => {
-    const dispatch = useDispatch(),
-        { pathname } = useLocation(),
-        isCategories = pathname.includes("categories"),
-        text = `Вы уверены, что хотите удалить "${item.name}"?`
+const RemoveCategory: React.FC<ModalRemoveItemProps> = ({ item, setModal }) => {
+    const dispatch = useDispatch()
+    const text = `Вы уверены, что хотите удалить категорию "${item.name}"?`
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        if (isCategories) {
-            dispatch(deleteCategory(item.id))
-            dispatch(clearTaskCategory(item.id))
-        } else {
-            dispatch(deleteTask(item.id))
-        }
+        dispatch(deleteCategory(item.id))
+        dispatch(clearTaskCategory(item.id))
         setModal(false)
     }
 
@@ -58,3 +47,5 @@ export const RemoveItem: React.FC<ModalRemoveItemProps> = ({
         </form>
     )
 }
+
+export default RemoveCategory
