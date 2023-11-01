@@ -14,6 +14,7 @@ interface SelectProps {
     setValue: React.Dispatch<React.SetStateAction<string>>
 }
 
+//ToDo: show something when no categories
 export const Select: React.FC<SelectProps> = ({
     value,
     label,

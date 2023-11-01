@@ -16,7 +16,7 @@ export const Input: React.FC<InputProps> = ({
         <div className={"flex flex-col gap-[10px] w-full"}>
             {label && <div className="text-[14px] text-zinc-400">{label}</div>}
             <input
-                className="border border-slate-200 hover:border-indigo-500 focus:border-indigo-500 outline-none rounded-[10px] h-[64px] px-[40px]"
+                className="border border-slate-200 hover:border-indigo-500 focus:border-indigo-500 outline-none rounded-[10px] h-[64px] px-[20px]"
                 placeholder={placeholder}
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
