@@ -1,16 +1,21 @@
 import { FC, FormEvent, useState } from "react"
 import { Input } from "../ui/Input"
 import { toast } from "react-toastify"
+import axios, { AxiosError } from "axios"
+import { IToken } from "../types"
+import { useNavigate } from "react-router-dom"
 
 const Registration: FC = () => {
-    const [firstName, setFirstName] = useState<string>("")
-    const [secondName, setSecondName] = useState<string>("")
+    const navigate = useNavigate()
+
+    const [firstname, setFirstname] = useState<string>("")
+    const [lastname, setLastname] = useState<string>("")
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        if (!firstName || !secondName || !email || !password) {
+        if (!firstname || !lastname || !email || !password) {
             toast.error("Заполните все поля!")
             return
         }
@@ -18,7 +23,24 @@ const Registration: FC = () => {
             toast.error("Неправильный формат почты!")
             return
         }
-        console.log({ firstName, secondName, email, password })
+        try {
+            const { data } = await axios.post<IToken>("/api/auth/register", {
+                firstname,
+                lastname,
+                email,
+                password,
+            })
+
+            localStorage.setItem("jwt", data.token)
+            navigate("/tasks")
+        } catch (e: unknown | AxiosError) {
+            //ToDo: deal with this tricky piece of code =)
+            if (axios.isAxiosError(e)) {
+                toast.error(e?.response?.data)
+            } else {
+                toast.error("Неизвестная сервера, попробуйте позже!")
+            }
+        }
     }
 
     return (
@@ -29,14 +51,14 @@ const Registration: FC = () => {
             >
                 <div className="font-medium text-[22px]">Регистрация</div>
                 <Input
-                    value={firstName}
+                    value={firstname}
                     placeholder={"Введите имя"}
-                    setValue={setFirstName}
+                    setValue={setFirstname}
                 />
                 <Input
-                    value={secondName}
+                    value={lastname}
                     placeholder={"Введите фамилию"}
-                    setValue={setSecondName}
+                    setValue={setLastname}
                 />
                 <Input
                     value={email}

@@ -11,3 +11,7 @@ export interface ICategory {
     name: string
     description: string
 }
+
+export interface IToken {
+    token: string
+}

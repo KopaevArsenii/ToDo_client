@@ -1,12 +1,16 @@
 import { Input } from "../ui/Input"
 import { FC, FormEvent, useState } from "react"
 import { toast } from "react-toastify"
+import axios, { AxiosError } from "axios"
+import { useNavigate } from "react-router-dom"
+import { IToken } from "../types"
 
 export const Login: FC = () => {
+    const navigate = useNavigate()
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (!email || !password) {
             toast.error("Заполните все поля!")
@@ -16,7 +20,23 @@ export const Login: FC = () => {
             toast.error("Неправильный формат почты!")
             return
         }
-        console.log({ email, password })
+
+        try {
+            const { data } = await axios.post<IToken>("/api/auth/login", {
+                email,
+                password,
+            })
+
+            localStorage.setItem("jwt", data.token)
+            navigate("/tasks")
+        } catch (e: unknown | AxiosError) {
+            //ToDo: deal with this tricky piece of code =)
+            if (axios.isAxiosError(e)) {
+                toast.error("Неправильный логин или пароль!")
+            } else {
+                toast.error("Неизвестная сервера, попробуйте позже!")
+            }
+        }
     }
 
     return (
