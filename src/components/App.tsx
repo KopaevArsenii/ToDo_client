@@ -7,12 +7,14 @@ import { Header } from "./Header"
 import { Tasks } from "../pages/Tasks"
 import { Categories } from "../pages/Categories"
 import { Login } from "../pages/Login"
+import Registration from "../pages/Registration"
 
 const App: FC = () => {
     return (
         <div className="App">
             <Routes>
                 <Route path="/login" element={<Login />} />
+                <Route path="/registration" element={<Registration />} />
                 <Route
                     path="/tasks"
                     element={
