@@ -25,6 +25,12 @@ export const Login: FC = () => {
                 >
                     Войти
                 </button>
+                <a
+                    href="/registration"
+                    className="w-full text-center hover:text-indigo-500"
+                >
+                    Ещё нет аккакунта? Заригестрируйтесь!
+                </a>
             </form>
         </div>
     )
