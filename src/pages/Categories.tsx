@@ -1,13 +1,19 @@
 /* VENDOR */
-import { useAppSelector } from "../redux/hooks"
+import { useAppDispatch, useAppSelector } from "../redux/hooks"
 
 /* APPLICATION */
 import CategoryListItem from "../components/CategoryListItem"
-import { getAllCategories } from "../features/categoriesSlice"
+import { fetchCategories, getAllCategories } from "../features/categoriesSlice"
 import NothingFound from "../components/NothingFound"
+import { useEffect } from "react"
 
 export const Categories = () => {
+    const dispatch = useAppDispatch()
     const categories = useAppSelector(getAllCategories)
+
+    useEffect(() => {
+        dispatch(fetchCategories())
+    }, [])
 
     return (
         <ul className="max-w-[1440px] mx-auto bg-white flex flex-col gap-[30px] py-[30px]">

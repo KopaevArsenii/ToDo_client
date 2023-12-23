@@ -3,8 +3,7 @@ import React from "react"
 import { useAppDispatch } from "../redux/hooks"
 
 /* APPLICATION */
-import { clearTaskCategory } from "../features/tasksSlice"
-import { deleteCategory } from "../features/categoriesSlice"
+import { deleteCategoryById } from "../features/categoriesSlice"
 import { ICategory } from "../types"
 
 interface RemoveCategoryProps {
@@ -20,8 +19,7 @@ const RemoveCategory: React.FC<RemoveCategoryProps> = ({
     const text = `Вы уверены, что хотите удалить категорию "${category.name}"?`
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        dispatch(deleteCategory(category.id))
-        dispatch(clearTaskCategory(category.id))
+        dispatch(deleteCategoryById(category.id))
         setModal(false)
     }
 
