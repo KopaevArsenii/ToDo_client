@@ -1,5 +1,5 @@
 import { Input } from "../ui/Input"
-import { FC, FormEvent, FormEventHandler, useState } from "react"
+import { FC, FormEvent, useState } from "react"
 import { toast } from "react-toastify"
 
 export const Login: FC = () => {

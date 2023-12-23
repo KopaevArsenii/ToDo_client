@@ -8,7 +8,6 @@ import { Tasks } from "../pages/Tasks"
 import { Categories } from "../pages/Categories"
 import { Login } from "../pages/Login"
 import Registration from "../pages/Registration"
-import { ToastContainer } from "react-toastify"
 
 const App: FC = () => {
     return (
