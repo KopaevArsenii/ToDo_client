@@ -1,20 +1,30 @@
 import { Input } from "../ui/Input"
-import { FC, FormEvent, useState } from "react"
+import { FC, FormEvent, FormEventHandler, useState } from "react"
 import { toast } from "react-toastify"
 
 export const Login: FC = () => {
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
 
-    const handleClick = (e: FormEvent<HTMLButtonElement>) => {
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        console.log("click")
-        toast.error("Ошибка ошибка")
+        if (!email || !password) {
+            toast.error("Заполните все поля!")
+            return
+        }
+        if (!email.match("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
+            toast.error("Неправильный формат почты!")
+            return
+        }
+        console.log({ email, password })
     }
 
     return (
         <div className="w-full bg-slate-200 h-screen flex justify-center items-center">
-            <form className="border border-slate-200 bg-white rounded-[30px] w-[600px] px-[60px] py-[40px] flex flex-col gap-[30px]">
+            <form
+                onSubmit={handleSubmit}
+                className="border border-slate-200 bg-white rounded-[30px] w-[600px] px-[60px] py-[40px] flex flex-col gap-[30px]"
+            >
                 <div className="font-medium text-[22px]">Авторизация</div>
                 <Input
                     value={email}
@@ -27,7 +37,6 @@ export const Login: FC = () => {
                     setValue={setPassword}
                 />
                 <button
-                    onClick={handleClick}
                     className="button-indigo h-[64px] rounded-[10px]"
                     type="submit"
                 >
