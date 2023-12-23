@@ -1,9 +1,16 @@
 import { Input } from "../ui/Input"
-import { FC, useState } from "react"
+import { FC, FormEvent, useState } from "react"
+import { toast } from "react-toastify"
 
 export const Login: FC = () => {
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
+
+    const handleClick = (e: FormEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+        console.log("click")
+        toast.error("Ошибка ошибка")
+    }
 
     return (
         <div className="w-full bg-slate-200 h-screen flex justify-center items-center">
@@ -20,6 +27,7 @@ export const Login: FC = () => {
                     setValue={setPassword}
                 />
                 <button
+                    onClick={handleClick}
                     className="button-indigo h-[64px] rounded-[10px]"
                     type="submit"
                 >
