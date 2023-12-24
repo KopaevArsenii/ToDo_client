@@ -26,6 +26,7 @@ const EditCategory: FC<EditCategoryProps> = ({ category, setModal }) => {
     }
 
     const handleCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
         setModal(false)
     }
 

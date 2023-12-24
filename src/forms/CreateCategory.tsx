@@ -30,6 +30,7 @@ const CreateCategory: FC<CreateCategoryProps> = ({ setModal }) => {
     }
 
     const handleCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
         setModal(false)
     }
 
