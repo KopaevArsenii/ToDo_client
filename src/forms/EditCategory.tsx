@@ -3,7 +3,7 @@ import React, { FC, useState } from "react"
 import { useAppDispatch } from "../redux/hooks"
 
 /* APPLICATION */
-import { updateCategory } from "../features/categoriesSlice"
+import { updateCategoryById } from "../features/categoriesSlice"
 import { Input } from "../ui/Input"
 import { Textarea } from "../ui/Textarea"
 import { ICategory } from "../types"
@@ -21,7 +21,7 @@ const EditCategory: FC<EditCategoryProps> = ({ category, setModal }) => {
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (name === "") return
-        dispatch(updateCategory({ id: category.id, name, description }))
+        dispatch(updateCategoryById({ id: category.id, name, description }))
         setModal(false)
     }
 

@@ -1,6 +1,5 @@
 /* VENDOR */
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { v4 as uuidv4 } from "uuid"
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 
 /* APPLICATION */
 import { RootState } from "../redux/store"
@@ -37,49 +36,42 @@ export const deleteCategoryById = createAsyncThunk(
     },
 )
 
-// export const deleteCategory = createAsyncThunk(
-//     "category/deleteCategory",
-//     async (id: number) => {
-//         const header = `Bearer ${localStorage.getItem("jwt")}`
-//         await axios.delete(`/api/category/delete?id=${1}`, {
-//             headers: { Authorization: header },
-//         })
-//         return id
-//     },
-// )
+export const updateCategoryById = createAsyncThunk(
+    "category/updateCategory",
+    async (category: ICategory) => {
+        const header = `Bearer ${localStorage.getItem("jwt")}`
+        await axios.put<string>(
+            `/api/category/edit?id=${category.id}`,
+            {
+                name: category.name,
+                description: category.description,
+            },
+            {
+                headers: { Authorization: header },
+            },
+        )
+        return category
+    },
+)
+
+export const createCategoryById = createAsyncThunk(
+    "category/createCategoryById",
+    async (category: ICreateCategory) => {
+        const header = `Bearer ${localStorage.getItem("jwt")}`
+        const { data } = await axios.post<ICategory>(
+            `/api/category/create`,
+            category,
+            { headers: { Authorization: header } },
+        )
+
+        return data
+    },
+)
 
 export const categoriesSlice = createSlice({
     name: "categories",
     initialState,
-    reducers: {
-        addCategory: (
-            state: ICategory[],
-            action: PayloadAction<ICreateCategory>,
-        ) => {
-            state.push({
-                id: uuidv4(),
-                ...action.payload,
-            })
-        },
-        updateCategory: (
-            state: ICategory[],
-            action: PayloadAction<ICategory>,
-        ) => {
-            const { id, name, description } = action.payload,
-                existingCategory = state.find((category) => category.id === id)
-
-            if (existingCategory) {
-                existingCategory.name = name
-                existingCategory.description = description
-            }
-        },
-        // deleteCategory: (state: ICategory[], action: PayloadAction<string>) => {
-        //     const remove = (element: ICategory) =>
-        //             element.id === action.payload,
-        //         removeTaskIndex = state.findIndex(remove)
-        //     state.splice(removeTaskIndex, 1)
-        // },
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder.addCase(fetchCategories.fulfilled, (state, action) => {
             state = action.payload
@@ -89,10 +81,22 @@ export const categoriesSlice = createSlice({
             state = state.filter((category) => category.id !== action.payload)
             return state
         })
+        builder.addCase(updateCategoryById.fulfilled, (state, action) => {
+            const { id, name, description } = action.payload
+            let oldCategory = state.find((category) => category.id === id)
+            if (oldCategory) {
+                oldCategory.name = name
+                oldCategory.description = description
+            }
+            return state
+        })
+
+        builder.addCase(createCategoryById.fulfilled, (state, action) => {
+            state.push(action.payload)
+            return state
+        })
     },
 })
-
-export const { addCategory, updateCategory } = categoriesSlice.actions
 
 export const getAllCategories = (state: RootState) => state.categories
 
