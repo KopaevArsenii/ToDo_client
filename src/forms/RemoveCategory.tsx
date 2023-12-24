@@ -19,11 +19,13 @@ const RemoveCategory: React.FC<RemoveCategoryProps> = ({
     const text = `Вы уверены, что хотите удалить категорию "${category.name}"?`
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
         dispatch(deleteCategoryById(category.id))
         setModal(false)
     }
 
     const handleCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
         setModal(false)
     }
 
