@@ -10,6 +10,7 @@ import { Select } from "../ui/Select"
 import { Input } from "../ui/Input"
 import close from "../icons/close.svg"
 import { ICategory } from "../types"
+import { fetchCategories } from "../features/categoriesSlice"
 
 export const Tasks: React.FC = () => {
     const dispatch = useAppDispatch()
@@ -19,6 +20,7 @@ export const Tasks: React.FC = () => {
     const [category, setCategory] = useState<ICategory["id"]>(0)
 
     useEffect(() => {
+        dispatch(fetchCategories())
         dispatch(fetchTasks())
     }, [])
 
