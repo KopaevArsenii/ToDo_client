@@ -3,7 +3,7 @@ import React, { FC, useState } from "react"
 import { useAppDispatch } from "../redux/hooks"
 
 /* APPLICATION */
-import { updateTask } from "../features/tasksSlice"
+import { updateTask, updateTaskById } from "../features/tasksSlice"
 import { Input } from "../ui/Input"
 import { Select } from "../ui/Select"
 import { Textarea } from "../ui/Textarea"
@@ -17,17 +17,18 @@ interface EditTaskProps {
 const EditTask: FC<EditTaskProps> = ({ task, setModal }) => {
     const dispatch = useAppDispatch()
     const [name, setName] = useState<string>(task.name)
-    const [category, setCategory] = useState<string>(task.category)
+    const [category, setCategory] = useState<number>(task.category.id)
     const [description, setDescription] = useState<string>(task.description)
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (name === "") return
-        dispatch(updateTask({ id: task.id, name, description, category }))
+        dispatch(updateTaskById({ id: task.id, name, description, category }))
         setModal(false)
     }
 
     const handleCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
         setModal(false)
     }
 

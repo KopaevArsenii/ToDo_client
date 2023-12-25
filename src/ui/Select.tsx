@@ -5,12 +5,13 @@ import { useAppSelector } from "../redux/hooks"
 /* APPLICATION */
 import down from "../icons/down.svg"
 import { getAllCategories } from "../features/categoriesSlice"
+import { ICategory } from "../types"
 
 interface SelectProps {
-    value: string | undefined
-    label?: string
+    value: ICategory["id"] | undefined
+    label?: ICategory["name"]
     placeholder: string
-    setValue: React.Dispatch<React.SetStateAction<string>>
+    setValue: React.Dispatch<React.SetStateAction<ICategory["id"]>>
 }
 
 //ToDo: show something when no categories

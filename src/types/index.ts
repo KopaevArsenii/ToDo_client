@@ -1,13 +1,13 @@
 export interface ITask {
-    id: string
+    id: number
     name: string
     description: string
-    category: string
+    category: ICategory
     done: boolean
 }
 
 export interface ICategory {
-    id: string
+    id: number
     name: string
     description: string
 }

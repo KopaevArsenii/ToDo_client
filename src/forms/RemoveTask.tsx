@@ -3,7 +3,7 @@ import React from "react"
 import { useAppDispatch } from "../redux/hooks"
 
 /* APPLICATION */
-import { deleteTask } from "../features/tasksSlice"
+import { deleteTask, deleteTaskById } from "../features/tasksSlice"
 import { ITask } from "../types"
 
 interface RemoveTaskProps {
@@ -16,11 +16,13 @@ const RemoveTask: React.FC<RemoveTaskProps> = ({ task, setModal }) => {
     const text = `Вы уверены, что хотите удалить задачу "${task.name}"?`
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        dispatch(deleteTask(task.id))
+        e.preventDefault()
+        dispatch(deleteTaskById(task.id))
         setModal(false)
     }
 
     const handleCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
         setModal(false)
     }
 

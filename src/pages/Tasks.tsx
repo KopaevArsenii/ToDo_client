@@ -1,47 +1,55 @@
 /* VENDOR */
-import React, { useState } from "react"
-import { useAppSelector } from "../redux/hooks"
+import React, { useEffect, useState } from "react"
+import { useAppDispatch, useAppSelector } from "../redux/hooks"
 
 /* APPLICATION */
 import TaskListItem from "../components/TaskListItem"
 import NothingFound from "../components/NothingFound"
-import { getAllTasks } from "../features/tasksSlice"
+import { fetchTasks, getAllTasks } from "../features/tasksSlice"
 import { Select } from "../ui/Select"
 import { Input } from "../ui/Input"
 import close from "../icons/close.svg"
+import { ICategory } from "../types"
 
 export const Tasks: React.FC = () => {
+    const dispatch = useAppDispatch()
     const tasks = useAppSelector(getAllTasks)
 
     const [search, setSearch] = useState<string>("")
-    const [category, setCategory] = useState<string>("")
+    const [category, setCategory] = useState<ICategory["id"]>(0)
 
-    const viewList = tasks.filter((task) => {
-        if (!category && !search) {
-            return true
-        }
+    useEffect(() => {
+        dispatch(fetchTasks())
+    }, [])
 
-        if (category && search) {
-            return (
-                task.category === category &&
-                task.name.toLowerCase().includes(search.toLowerCase())
-            )
-        }
+    // const viewList = tasks.filter((task) => {
+    //     if (!category && !search) {
+    //         return true
+    //     }
+    //
+    //     if (category && search) {
+    //         return (
+    //             task.category === category &&
+    //             task.name.toLowerCase().includes(search.toLowerCase())
+    //         )
+    //     }
+    //
+    //     if (category) {
+    //         return task.category === category
+    //     }
+    //
+    //     if (search) {
+    //         return task.name.toLowerCase().includes(search.toLowerCase())
+    //     }
+    //
+    //     return false
+    // })
 
-        if (category) {
-            return task.category === category
-        }
-
-        if (search) {
-            return task.name.toLowerCase().includes(search.toLowerCase())
-        }
-
-        return false
-    })
+    const viewList = tasks
 
     const handleClearFilters = (e: React.MouseEvent<HTMLButtonElement>) => {
         setSearch("")
-        setCategory("")
+        setCategory(0)
     }
 
     return (

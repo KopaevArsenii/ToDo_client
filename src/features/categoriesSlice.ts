@@ -35,7 +35,7 @@ export const fetchCategories = createAsyncThunk(
 
 export const deleteCategoryById = createAsyncThunk(
     "category/deleteCategoryById",
-    async (id: string) => {
+    async (id: ICategory["id"]) => {
         const header = `Bearer ${localStorage.getItem("jwt")}`
         await axios.delete<string>(`/api/category/delete?id=${id}`, {
             headers: { Authorization: header },

@@ -30,13 +30,14 @@ const TaskListItem: FC<TaskListItemProps> = ({ task }) => {
         setRemoveModalActive((prev) => !prev)
     const handleSwitchTaskDone = (
         e: React.MouseEvent<HTMLButtonElement>,
-        id: string,
+        id: ITask["id"],
     ) => {
         dispatch(setTaskDone(id))
     }
 
+    //ToDo внимательно посмотреть и переписать
     const categoryName = categories.find(
-        (category) => category.id === task.category,
+        (category) => category.id === task.category.id,
     )?.name
 
     return (

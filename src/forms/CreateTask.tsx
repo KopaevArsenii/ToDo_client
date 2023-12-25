@@ -14,19 +14,19 @@ interface CreateTaskProps {
 const CreateTask: FC<CreateTaskProps> = ({ setModal }) => {
     const dispatch = useAppDispatch()
     const [name, setName] = useState<string>("")
-    const [category, setCategory] = useState<string>("")
+    const [category, setCategory] = useState<number>(0)
     const [description, setDescription] = useState<string>("")
 
     function clearForm() {
         setName("")
         setDescription("")
-        setCategory("")
+        setCategory(0)
     }
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (name === "") return
-        dispatch(addTask({ name, description, category }))
+        // dispatch(addTask({ name, description, category }))
         clearForm()
         setModal(false)
     }
