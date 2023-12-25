@@ -20,7 +20,7 @@ interface TaskListItemProps {
 
 const TaskListItem: FC<TaskListItemProps> = ({ task }) => {
     const dispatch = useAppDispatch()
-    const categories = useAppSelector(getAllCategories)
+    const { categories } = useAppSelector(getAllCategories)
     const [editModalActive, setEditModalActive] = useState<boolean>(false)
     const [removeModalActive, setRemoveModalActive] = useState<boolean>(false)
 

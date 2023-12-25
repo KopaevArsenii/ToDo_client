@@ -21,7 +21,7 @@ export const Select: React.FC<SelectProps> = ({
     setValue,
 }) => {
     const [isActive, setIsActive] = useState<boolean>(false)
-    const options = useAppSelector(getAllCategories)
+    const { categories } = useAppSelector(getAllCategories)
 
     return (
         <div className="flex flex-col gap-[10px] w-full">
@@ -32,8 +32,8 @@ export const Select: React.FC<SelectProps> = ({
             >
                 <div className="flex gap-[20px] w-full justify-between items-center">
                     <div className="text-[22px] text-indigo-500 truncate">
-                        {options.find((option) => option.id === value)?.name ||
-                            "Категории"}
+                        {categories.find((option) => option.id === value)
+                            ?.name || "Категории"}
                     </div>
                     <img
                         src={down}
@@ -49,7 +49,7 @@ export const Select: React.FC<SelectProps> = ({
                 )}
                 {isActive && (
                     <div className="top-[80px] left-0 bg-white w-full absolute z-10 rounded-[10px] border border-slate-200 text-[18px] overflow-y-auto max-h-[239px]">
-                        {options.map((option) => (
+                        {categories.map((option) => (
                             <div
                                 className="cursor-pointer truncate hover:text-white border-b border-slate-200  hover:bg-indigo-500 first:rounded-t-[10px] last:rounded-b-[10px] last:border-0 px-[20px] py-[10px]"
                                 onClick={() => {

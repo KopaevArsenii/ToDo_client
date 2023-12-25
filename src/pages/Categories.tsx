@@ -6,14 +6,24 @@ import CategoryListItem from "../components/CategoryListItem"
 import { fetchCategories, getAllCategories } from "../features/categoriesSlice"
 import NothingFound from "../components/NothingFound"
 import { useEffect } from "react"
+import { Id, toast } from "react-toastify"
 
 export const Categories = () => {
     const dispatch = useAppDispatch()
-    const categories = useAppSelector(getAllCategories)
+    const { categories, loading } = useAppSelector(getAllCategories)
+    let toastId: Id
 
     useEffect(() => {
         dispatch(fetchCategories())
     }, [])
+
+    useEffect(() => {
+        if (loading) {
+            toastId = toast.loading("Loading")
+        } else {
+            toast.dismiss(toastId)
+        }
+    }, [loading])
 
     return (
         <ul className="max-w-[1440px] mx-auto bg-white flex flex-col gap-[30px] py-[30px]">

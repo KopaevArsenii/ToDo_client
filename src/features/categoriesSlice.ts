@@ -11,7 +11,14 @@ export interface ICreateCategory {
     description: string
 }
 
-const initialState: ICategory[] = []
+export interface CategorySliceState {
+    categories: ICategory[]
+    loading: boolean
+}
+const initialState: CategorySliceState = {
+    categories: [],
+    loading: false,
+}
 
 export const fetchCategories = createAsyncThunk(
     "category/fetchCategories",
@@ -73,31 +80,59 @@ export const categoriesSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
+        builder.addCase(fetchCategories.pending, (state, action) => {
+            state.loading = true
+            return state
+        })
         builder.addCase(fetchCategories.fulfilled, (state, action) => {
-            state = action.payload
+            state.categories = action.payload
+            state.loading = false
             return state
         })
+
         builder.addCase(deleteCategoryById.fulfilled, (state, action) => {
-            state = state.filter((category) => category.id !== action.payload)
+            state.categories = state.categories.filter(
+                (category) => category.id !== action.payload,
+            )
+            state.loading = false
             return state
         })
+        builder.addCase(deleteCategoryById.pending, (state, action) => {
+            state.loading = true
+            return state
+        })
+
         builder.addCase(updateCategoryById.fulfilled, (state, action) => {
             const { id, name, description } = action.payload
-            let oldCategory = state.find((category) => category.id === id)
+            let oldCategory = state.categories.find(
+                (category) => category.id === id,
+            )
             if (oldCategory) {
                 oldCategory.name = name
                 oldCategory.description = description
             }
+            state.loading = false
+            return state
+        })
+        builder.addCase(updateCategoryById.pending, (state, action) => {
+            state.loading = true
             return state
         })
 
         builder.addCase(createCategoryById.fulfilled, (state, action) => {
-            state.push(action.payload)
+            state.categories.push(action.payload)
+            state.loading = false
+            return state
+        })
+        builder.addCase(createCategoryById.pending, (state, action) => {
+            state.loading = true
             return state
         })
     },
 })
 
 export const getAllCategories = (state: RootState) => state.categories
+
+// export const getAllCategories = (state: RootState) => state.categories
 
 export default categoriesSlice.reducer
