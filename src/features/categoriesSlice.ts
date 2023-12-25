@@ -14,10 +14,12 @@ export interface ICreateCategory {
 export interface CategorySliceState {
     categories: ICategory[]
     loading: boolean
+    error: string
 }
 const initialState: CategorySliceState = {
     categories: [],
     loading: false,
+    error: "",
 }
 
 export const fetchCategories = createAsyncThunk(
@@ -38,7 +40,6 @@ export const deleteCategoryById = createAsyncThunk(
         await axios.delete<string>(`/api/category/delete?id=${id}`, {
             headers: { Authorization: header },
         })
-
         return id
     },
 )
@@ -70,7 +71,6 @@ export const createCategoryById = createAsyncThunk(
             category,
             { headers: { Authorization: header } },
         )
-
         return data
     },
 )
@@ -87,6 +87,11 @@ export const categoriesSlice = createSlice({
         builder.addCase(fetchCategories.fulfilled, (state, action) => {
             state.categories = action.payload
             state.loading = false
+            return state
+        })
+        builder.addCase(fetchCategories.rejected, (state, action) => {
+            state.loading = false
+            state.error = "Error while fetching categories"
             return state
         })
 

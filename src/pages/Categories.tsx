@@ -5,13 +5,13 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import CategoryListItem from "../components/CategoryListItem"
 import { fetchCategories, getAllCategories } from "../features/categoriesSlice"
 import NothingFound from "../components/NothingFound"
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { Id, toast } from "react-toastify"
 
 export const Categories = () => {
     const dispatch = useAppDispatch()
-    const { categories, loading } = useAppSelector(getAllCategories)
-    let toastId: Id
+    const { categories, loading, error } = useAppSelector(getAllCategories)
+    const toastId = useRef<Id>()
 
     useEffect(() => {
         dispatch(fetchCategories())
@@ -19,11 +19,17 @@ export const Categories = () => {
 
     useEffect(() => {
         if (loading) {
-            toastId = toast.loading("Loading")
+            toastId.current = toast.loading("Loading")
         } else {
-            toast.dismiss(toastId)
+            toast.dismiss(toastId.current)
         }
     }, [loading])
+
+    useEffect(() => {
+        if (error) {
+            toast.error(error)
+        }
+    }, [error])
 
     return (
         <ul className="max-w-[1440px] mx-auto bg-white flex flex-col gap-[30px] py-[30px]">
