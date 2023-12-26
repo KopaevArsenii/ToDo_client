@@ -3,10 +3,10 @@ import React, { FC, useState } from "react"
 import { useAppDispatch } from "../redux/hooks"
 
 /* APPLICATION */
-import { addTask } from "../features/tasksSlice"
 import { Input } from "../ui/Input"
 import { Select } from "../ui/Select"
 import { Textarea } from "../ui/Textarea"
+import { createTaskById } from "../features/tasksSlice"
 
 interface CreateTaskProps {
     setModal: React.Dispatch<React.SetStateAction<boolean>>
@@ -26,12 +26,13 @@ const CreateTask: FC<CreateTaskProps> = ({ setModal }) => {
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (name === "") return
-        // dispatch(addTask({ name, description, category }))
+        dispatch(createTaskById({ name, description, category }))
         clearForm()
         setModal(false)
     }
 
     const handleCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
         setModal(false)
     }
 

@@ -10,7 +10,7 @@ import axios from "axios"
 export interface ICreateTask {
     name: string
     description: string
-    category: string
+    category: number
 }
 
 export interface IEditTask {
@@ -57,6 +57,36 @@ export const updateTaskById = createAsyncThunk(
         )
 
         return data
+    },
+)
+
+export const createTaskById = createAsyncThunk(
+    "task/createTaskById",
+    async (task: ICreateTask) => {
+        const header = `Bearer ${localStorage.getItem("jwt")}`
+        const { data } = await axios.post<ITask>(
+            `/api/task/create`,
+            {
+                name: task.name,
+                description: task.description,
+                categoryId: task.category,
+            },
+            { headers: { Authorization: header } },
+        )
+
+        return data
+    },
+)
+
+export const switchTask = createAsyncThunk(
+    "task/switchTaskAsDone",
+    async (id: ITask["id"]) => {
+        const header = `Bearer ${localStorage.getItem("jwt")}`
+        await axios.get<string>(`/api/task/switch?id=${id}`, {
+            headers: { Authorization: header },
+        })
+
+        return id
     },
 )
 
@@ -118,6 +148,19 @@ export const tasksSlice = createSlice({
                 oldTask.description = action.payload.description
                 oldTask.category = action.payload.category
             }
+            return state
+        })
+        builder.addCase(createTaskById.fulfilled, (state, action) => {
+            state.push(action.payload)
+        })
+        builder.addCase(switchTask.fulfilled, (state, action) => {
+            //Написать
+            state.forEach((task) => {
+                if (task.id === action.payload) {
+                    task.done = !task.done
+                }
+            })
+
             return state
         })
     },

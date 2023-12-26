@@ -6,7 +6,7 @@ import { useAppSelector } from "../redux/hooks"
 /* APPLICATION */
 import Modal from "./Modal"
 import Checkbox from "../ui/Checkbox"
-import { setTaskDone } from "../features/tasksSlice"
+import { setTaskDone, switchTask } from "../features/tasksSlice"
 import { getAllCategories } from "../features/categoriesSlice"
 import EditTask from "../forms/EditTask"
 import RemoveTask from "../forms/RemoveTask"
@@ -32,7 +32,8 @@ const TaskListItem: FC<TaskListItemProps> = ({ task }) => {
         e: React.MouseEvent<HTMLButtonElement>,
         id: ITask["id"],
     ) => {
-        dispatch(setTaskDone(id))
+        e.preventDefault()
+        dispatch(switchTask(id))
     }
 
     //ToDo внимательно посмотреть и переписать
