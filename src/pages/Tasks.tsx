@@ -14,6 +14,7 @@ import {
     getCategoriesState,
 } from "../features/categoriesSlice"
 import { Id, toast } from "react-toastify"
+import { ICategory } from "../types"
 
 export const Tasks: React.FC = () => {
     const dispatch = useAppDispatch()
