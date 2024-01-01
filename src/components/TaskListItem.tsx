@@ -24,12 +24,16 @@ const TaskListItem: FC<TaskListItemProps> = ({ task }) => {
     const [editModalActive, setEditModalActive] = useState<boolean>(false)
     const [removeModalActive, setRemoveModalActive] = useState<boolean>(false)
 
-    const handleSwitchEditModal = (e: React.MouseEvent<HTMLButtonElement>) =>
+    const handleSwitchEditModal = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
-    setEditModalActive((prev) => !prev)
-    const handleSwitchRemoveModal = (e: React.MouseEvent<HTMLButtonElement>) =>
+        setEditModalActive((prev) => !prev)
+    }
+    const handleSwitchRemoveModal = (
+        e: React.MouseEvent<HTMLButtonElement>,
+    ) => {
         e.preventDefault()
-    setRemoveModalActive((prev) => !prev)
+        setRemoveModalActive((prev) => !prev)
+    }
     const handleSwitchTaskDone = (
         e: React.MouseEvent<HTMLButtonElement>,
         id: ITask["id"],

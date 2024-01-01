@@ -1,10 +1,8 @@
 /* VENDOR */
 import React, { useState } from "react"
-import { useAppSelector } from "../redux/hooks"
 
 /* APPLICATION */
 import down from "../icons/down.svg"
-import { getCategoriesState } from "../features/categoriesSlice"
 import { ICategory } from "../types"
 
 interface SelectProps {
