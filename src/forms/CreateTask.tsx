@@ -1,17 +1,19 @@
 /* VENDOR */
 import React, { FC, useState } from "react"
-import { useAppDispatch } from "../redux/hooks"
+import { useAppDispatch, useAppSelector } from "../redux/hooks"
 
 /* APPLICATION */
 import { Input } from "../ui/Input"
 import { Select } from "../ui/Select"
 import { Textarea } from "../ui/Textarea"
-import { createTaskById } from "../features/tasksSlice"
+import { createTask } from "../features/tasksSlice"
+import { getCategoriesState } from "../features/categoriesSlice"
 
 interface CreateTaskProps {
     setModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 const CreateTask: FC<CreateTaskProps> = ({ setModal }) => {
+    const { categories } = useAppSelector(getCategoriesState)
     const dispatch = useAppDispatch()
     const [name, setName] = useState<string>("")
     const [category, setCategory] = useState<number>(0)
@@ -26,7 +28,7 @@ const CreateTask: FC<CreateTaskProps> = ({ setModal }) => {
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (name === "") return
-        dispatch(createTaskById({ name, description, category }))
+        dispatch(createTask({ name, description, category }))
         clearForm()
         setModal(false)
     }
@@ -47,6 +49,7 @@ const CreateTask: FC<CreateTaskProps> = ({ setModal }) => {
                     required
                 />
                 <Select
+                    options={categories}
                     value={category}
                     label={"Категории"}
                     placeholder={"Выберете категорию"}

@@ -3,7 +3,7 @@ import React from "react"
 import { useAppDispatch } from "../redux/hooks"
 
 /* APPLICATION */
-import { deleteTask, deleteTaskById } from "../features/tasksSlice"
+import { deleteTask } from "../features/tasksSlice"
 import { ITask } from "../types"
 
 interface RemoveTaskProps {
@@ -17,7 +17,7 @@ const RemoveTask: React.FC<RemoveTaskProps> = ({ task, setModal }) => {
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        dispatch(deleteTaskById(task.id))
+        dispatch(deleteTask(task.id))
         setModal(false)
     }
 

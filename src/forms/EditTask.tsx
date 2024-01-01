@@ -1,13 +1,14 @@
 /* VENDOR */
 import React, { FC, useState } from "react"
-import { useAppDispatch } from "../redux/hooks"
+import { useAppDispatch, useAppSelector } from "../redux/hooks"
 
 /* APPLICATION */
-import { updateTask, updateTaskById } from "../features/tasksSlice"
+import { editTask } from "../features/tasksSlice"
 import { Input } from "../ui/Input"
 import { Select } from "../ui/Select"
 import { Textarea } from "../ui/Textarea"
 import { ITask } from "../types"
+import { getCategoriesState } from "../features/categoriesSlice"
 
 interface EditTaskProps {
     task: ITask
@@ -15,6 +16,7 @@ interface EditTaskProps {
 }
 
 const EditTask: FC<EditTaskProps> = ({ task, setModal }) => {
+    const { categories } = useAppSelector(getCategoriesState)
     const dispatch = useAppDispatch()
     const [name, setName] = useState<string>(task.name)
     const [category, setCategory] = useState<number>(task.category.id)
@@ -23,7 +25,7 @@ const EditTask: FC<EditTaskProps> = ({ task, setModal }) => {
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (name === "") return
-        dispatch(updateTaskById({ id: task.id, name, description, category }))
+        dispatch(editTask({ id: task.id, name, description, category }))
         setModal(false)
     }
 
@@ -43,6 +45,7 @@ const EditTask: FC<EditTaskProps> = ({ task, setModal }) => {
                     required
                 />
                 <Select
+                    options={categories}
                     value={category}
                     label={"Категория"}
                     placeholder={"Выберете категориб"}

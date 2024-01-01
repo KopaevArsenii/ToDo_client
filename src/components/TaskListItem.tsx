@@ -6,8 +6,8 @@ import { useAppSelector } from "../redux/hooks"
 /* APPLICATION */
 import Modal from "./Modal"
 import Checkbox from "../ui/Checkbox"
-import { setTaskDone, switchTask } from "../features/tasksSlice"
-import { getAllCategories } from "../features/categoriesSlice"
+import { switchTask } from "../features/tasksSlice"
+import { getCategoriesState } from "../features/categoriesSlice"
 import EditTask from "../forms/EditTask"
 import RemoveTask from "../forms/RemoveTask"
 import edit from "../icons/edit.svg"
@@ -20,14 +20,16 @@ interface TaskListItemProps {
 
 const TaskListItem: FC<TaskListItemProps> = ({ task }) => {
     const dispatch = useAppDispatch()
-    const { categories } = useAppSelector(getAllCategories)
+    const { categories } = useAppSelector(getCategoriesState)
     const [editModalActive, setEditModalActive] = useState<boolean>(false)
     const [removeModalActive, setRemoveModalActive] = useState<boolean>(false)
 
     const handleSwitchEditModal = (e: React.MouseEvent<HTMLButtonElement>) =>
-        setEditModalActive((prev) => !prev)
+        e.preventDefault()
+    setEditModalActive((prev) => !prev)
     const handleSwitchRemoveModal = (e: React.MouseEvent<HTMLButtonElement>) =>
-        setRemoveModalActive((prev) => !prev)
+        e.preventDefault()
+    setRemoveModalActive((prev) => !prev)
     const handleSwitchTaskDone = (
         e: React.MouseEvent<HTMLButtonElement>,
         id: ITask["id"],

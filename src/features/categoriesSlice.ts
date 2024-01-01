@@ -18,7 +18,7 @@ export interface CategorySliceState {
 }
 const initialState: CategorySliceState = {
     categories: [],
-    loading: false,
+    loading: true,
     error: "",
 }
 
@@ -136,8 +136,6 @@ export const categoriesSlice = createSlice({
     },
 })
 
-export const getAllCategories = (state: RootState) => state.categories
-
-// export const getAllCategories = (state: RootState) => state.categories
+export const getCategoriesState = (state: RootState) => state.categories
 
 export default categoriesSlice.reducer

@@ -1,55 +1,84 @@
 /* VENDOR */
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
 
 /* APPLICATION */
 import TaskListItem from "../components/TaskListItem"
 import NothingFound from "../components/NothingFound"
-import { fetchTasks, getAllTasks } from "../features/tasksSlice"
+import { getTasks, getTasksState } from "../features/tasksSlice"
 import { Select } from "../ui/Select"
 import { Input } from "../ui/Input"
 import close from "../icons/close.svg"
-import { ICategory } from "../types"
-import { fetchCategories } from "../features/categoriesSlice"
+import {
+    fetchCategories,
+    getCategoriesState,
+} from "../features/categoriesSlice"
+import { Id, toast } from "react-toastify"
 
 export const Tasks: React.FC = () => {
     const dispatch = useAppDispatch()
-    const tasks = useAppSelector(getAllTasks)
+    const {
+        tasks,
+        loading: taskLoading,
+        error: taskError,
+    } = useAppSelector(getTasksState)
+    const {
+        categories,
+        loading: categoriesLoading,
+        error: categoriesError,
+    } = useAppSelector(getCategoriesState)
+    const toastId = useRef<Id>()
 
     const [search, setSearch] = useState<string>("")
     const [category, setCategory] = useState<ICategory["id"]>(0)
 
     useEffect(() => {
         dispatch(fetchCategories())
-        dispatch(fetchTasks())
+        dispatch(getTasks())
     }, [])
 
-    // const viewList = tasks.filter((task) => {
-    //     if (!category && !search) {
-    //         return true
-    //     }
-    //
-    //     if (category && search) {
-    //         return (
-    //             task.category === category &&
-    //             task.name.toLowerCase().includes(search.toLowerCase())
-    //         )
-    //     }
-    //
-    //     if (category) {
-    //         return task.category === category
-    //     }
-    //
-    //     if (search) {
-    //         return task.name.toLowerCase().includes(search.toLowerCase())
-    //     }
-    //
-    //     return false
-    // })
+    useEffect(() => {
+        if ((taskLoading || categoriesLoading) && !toastId.current) {
+            toastId.current = toast.loading("Loading")
+        } else if (toastId.current) {
+            toast.dismiss(toastId.current)
+        }
+    }, [taskLoading, categoriesLoading])
 
-    const viewList = tasks
+    useEffect(() => {
+        if (taskError) {
+            toast.error(taskError)
+        }
+        if (categoriesError) {
+            toast.error(categoriesError)
+        }
+    }, [taskError, categoriesError])
+
+    const viewList = tasks.filter((task) => {
+        if (!category && !search) {
+            return true
+        }
+
+        if (category && search) {
+            return (
+                task.category.id === category &&
+                task.name.toLowerCase().includes(search.toLowerCase())
+            )
+        }
+
+        if (category) {
+            return task.category.id === category
+        }
+
+        if (search) {
+            return task.name.toLowerCase().includes(search.toLowerCase())
+        }
+
+        return false
+    })
 
     const handleClearFilters = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
         setSearch("")
         setCategory(0)
     }
@@ -63,6 +92,7 @@ export const Tasks: React.FC = () => {
                     setValue={setSearch}
                 />
                 <Select
+                    options={categories}
                     value={category}
                     placeholder={"Введите назавние категории"}
                     setValue={setCategory}
@@ -78,7 +108,7 @@ export const Tasks: React.FC = () => {
                 {viewList.map((task) => (
                     <TaskListItem key={task.id} task={task} />
                 ))}
-                {viewList.length === 0 && (
+                {viewList.length === 0 && !taskLoading && (
                     <NothingFound text={"К сожалению, ничего не найдено =("} />
                 )}
             </ul>

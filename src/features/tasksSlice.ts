@@ -1,6 +1,5 @@
 /* VENDOR */
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { v4 as uuidv4 } from "uuid"
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 
 /* APPLICATION */
 import { RootState } from "../redux/store"
@@ -20,9 +19,19 @@ export interface IEditTask {
     category: number
 }
 
-const initialState: ITask[] = []
+export interface TaskSliceState {
+    tasks: ITask[]
+    loading: boolean
+    error: string
+}
 
-export const fetchTasks = createAsyncThunk("task/fetchTasks", async () => {
+const initialState: TaskSliceState = {
+    tasks: [],
+    loading: true,
+    error: "",
+}
+
+export const getTasks = createAsyncThunk("task/fetchTasks", async () => {
     const header = `Bearer ${localStorage.getItem("jwt")}`
     const { data } = await axios.get<ITask[]>(`/api/task`, {
         headers: { Authorization: header },
@@ -31,7 +40,7 @@ export const fetchTasks = createAsyncThunk("task/fetchTasks", async () => {
     return data
 })
 
-export const deleteTaskById = createAsyncThunk(
+export const deleteTask = createAsyncThunk(
     "task/deleteTaskById",
     async (id: ITask["id"]) => {
         const header = `Bearer ${localStorage.getItem("jwt")}`
@@ -42,7 +51,7 @@ export const deleteTaskById = createAsyncThunk(
     },
 )
 
-export const updateTaskById = createAsyncThunk(
+export const editTask = createAsyncThunk(
     "task/updateTaskById",
     async (task: IEditTask) => {
         const header = `Bearer ${localStorage.getItem("jwt")}`
@@ -60,7 +69,7 @@ export const updateTaskById = createAsyncThunk(
     },
 )
 
-export const createTaskById = createAsyncThunk(
+export const createTask = createAsyncThunk(
     "task/createTaskById",
     async (task: ICreateTask) => {
         const header = `Bearer ${localStorage.getItem("jwt")}`
@@ -93,87 +102,96 @@ export const switchTask = createAsyncThunk(
 export const tasksSlice = createSlice({
     name: "tasks",
     initialState,
-    reducers: {
-        addTask: (state: ITask[], action: PayloadAction<ICreateTask>) => {
-            // state.push({
-            //     id: 1,
-            //     done: false,
-            //     ...action.payload,
-            // })
-        },
-        updateTask: (state: ITask[], action: PayloadAction<IEditTask>) => {
-            const { id, name, description, category } = action.payload,
-                existingTask = state.find((task) => task.id === id)
-
-            if (existingTask) {
-                existingTask.name = name
-                existingTask.description = description
-                // existingTask.category = category
-            }
-        },
-        deleteTask: (state: ITask[], action: PayloadAction<ITask["id"]>) => {
-            let rm = (el: ITask, i: number, arr: ITask[]) =>
-                    el.id === action.payload,
-                rmTaskIndex = state.findIndex(rm)
-
-            state.splice(rmTaskIndex, 1)
-        },
-        setTaskDone: (state: ITask[], action: PayloadAction<ITask["id"]>) => {
-            let task = state.find((task) => task.id === action.payload)
-            const currentDoneValue = task?.done
-            if (task) {
-                task.done = !currentDoneValue
-            }
-        },
-        clearTaskCategory: (state, action) => {
-            // state.forEach((task) => {
-            //     if (task.category === action.payload) task.category = ""
-            // })
-        },
-    },
+    reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(fetchTasks.fulfilled, (state, action) => {
-            state = action.payload
+        builder.addCase(getTasks.fulfilled, (state, action) => {
+            state.tasks = action.payload
+            state.loading = false
             return state
         })
-        builder.addCase(deleteTaskById.fulfilled, (state, action) => {
-            state = state.filter((task) => task.id != action.payload)
+        builder.addCase(getTasks.pending, (state, action) => {
+            state.loading = true
             return state
         })
-        builder.addCase(updateTaskById.fulfilled, (state, action) => {
-            const oldTask = state.find((task) => task.id === action.payload.id)
+        builder.addCase(getTasks.rejected, (state, action) => {
+            state.loading = false
+            state.error = "Error while fetching tasks"
+            return state
+        })
+        builder.addCase(deleteTask.fulfilled, (state, action) => {
+            state.tasks = state.tasks.filter(
+                (task) => task.id != action.payload,
+            )
+            state.loading = false
+            return state
+        })
+        builder.addCase(deleteTask.pending, (state, action) => {
+            state.loading = true
+            return state
+        })
+        builder.addCase(deleteTask.rejected, (state, action) => {
+            state.loading = false
+            state.error = "Task deletion error"
+        })
+        builder.addCase(editTask.fulfilled, (state, action) => {
+            const oldTask = state.tasks.find(
+                (task) => task.id === action.payload.id,
+            )
 
             if (oldTask) {
                 oldTask.name = action.payload.name
                 oldTask.description = action.payload.description
                 oldTask.category = action.payload.category
             }
+
+            state.loading = false
             return state
         })
-        builder.addCase(createTaskById.fulfilled, (state, action) => {
-            state.push(action.payload)
+        builder.addCase(editTask.pending, (state, action) => {
+            state.loading = true
+            return state
+        })
+        builder.addCase(editTask.rejected, (state, action) => {
+            state.loading = false
+            state.error = "Task update error"
+            return state
+        })
+        builder.addCase(createTask.fulfilled, (state, action) => {
+            state.tasks.push(action.payload)
+            state.loading = false
+        })
+        builder.addCase(createTask.pending, (state, action) => {
+            state.loading = true
+            return state
+        })
+        builder.addCase(createTask.rejected, (state, action) => {
+            state.loading = false
+            state.error = "Task creation error"
+            return state
         })
         builder.addCase(switchTask.fulfilled, (state, action) => {
-            //Написать
-            state.forEach((task) => {
+            state.tasks.forEach((task) => {
                 if (task.id === action.payload) {
                     task.done = !task.done
                 }
             })
-
+            state.loading = false
+            return state
+        })
+        builder.addCase(switchTask.pending, (state, action) => {
+            state.loading = true
+            return state
+        })
+        builder.addCase(switchTask.rejected, (state, action) => {
+            state.loading = false
+            state.error = "Error while switching task"
             return state
         })
     },
 })
 
-export const {
-    addTask,
-    updateTask,
-    deleteTask,
-    setTaskDone,
-    clearTaskCategory,
-} = tasksSlice.actions
+export const {} = tasksSlice.actions
 
-export const getAllTasks = (state: RootState) => state.tasks
+export const getTasksState = (state: RootState) => state.tasks
 
 export default tasksSlice.reducer
