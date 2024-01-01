@@ -23,7 +23,7 @@ const CreateCategory: FC<CreateCategoryProps> = ({ setModal }) => {
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        if (name === "") return
+        if (name === "" || description === "") return
         dispatch(createCategoryById({ name, description }))
         clearForm()
         setModal(false)
@@ -38,16 +38,17 @@ const CreateCategory: FC<CreateCategoryProps> = ({ setModal }) => {
         <form onSubmit={onSubmit} className="flex flex-col gap-[30px]">
             <Input
                 value={name}
-                label={"Название"}
-                placeholder={"Введите название"}
+                label={"Title"}
+                placeholder={"Enter title"}
                 setValue={setName}
                 required
             />
             <Textarea
                 value={description}
-                label={"Описание"}
-                placeholder={"Введите описание"}
+                label={"Description"}
+                placeholder={"Enter description"}
                 setValue={setDescription}
+                required
             />
             <div className="flex gap-[30px] h-[64px]">
                 <button
@@ -55,10 +56,10 @@ const CreateCategory: FC<CreateCategoryProps> = ({ setModal }) => {
                     onClick={handleCancel}
                     type="button"
                 >
-                    Отмена
+                    Cancel
                 </button>
                 <button className="button button-indigo" type="submit">
-                    Подтвердить
+                    Submit
                 </button>
             </div>
         </form>

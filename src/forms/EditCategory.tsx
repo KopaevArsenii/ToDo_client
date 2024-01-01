@@ -45,6 +45,7 @@ const EditCategory: FC<EditCategoryProps> = ({ category, setModal }) => {
                 label={"Описание"}
                 placeholder={"Введите описание"}
                 setValue={setDescription}
+                required
             />
             <div className="flex gap-[30px] h-[64px]">
                 <button

@@ -27,7 +27,7 @@ const CreateTask: FC<CreateTaskProps> = ({ setModal }) => {
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        if (name === "") return
+        if (name === "" || description === "") return
         dispatch(createTask({ name, description, category }))
         clearForm()
         setModal(false)
@@ -43,24 +43,25 @@ const CreateTask: FC<CreateTaskProps> = ({ setModal }) => {
             <div className="flex gap-[30px]">
                 <Input
                     value={name}
-                    label={"Название"}
-                    placeholder={"Введите название"}
+                    label={"Title"}
+                    placeholder={"Enter title"}
                     setValue={setName}
                     required
                 />
                 <Select
                     options={categories}
                     value={category}
-                    label={"Категории"}
-                    placeholder={"Выберете категорию"}
+                    label={"Category"}
+                    placeholder={"Select category"}
                     setValue={setCategory}
                 />
             </div>
             <Textarea
                 value={description}
-                label={"Описание"}
-                placeholder={"Введите описание"}
+                label={"Description"}
+                placeholder={"Enter description"}
                 setValue={setDescription}
+                required
             />
             <div className="flex gap-[30px] h-[64px]">
                 <button
@@ -68,10 +69,10 @@ const CreateTask: FC<CreateTaskProps> = ({ setModal }) => {
                     onClick={handleCancel}
                     type="button"
                 >
-                    Отмена
+                    Cancel
                 </button>
                 <button className="button button-indigo" type="submit">
-                    Подтвердить
+                    Submit
                 </button>
             </div>
         </form>

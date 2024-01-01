@@ -13,7 +13,7 @@ interface RemoveTaskProps {
 
 const RemoveTask: React.FC<RemoveTaskProps> = ({ task, setModal }) => {
     const dispatch = useAppDispatch()
-    const text = `Вы уверены, что хотите удалить задачу "${task.name}"?`
+    const text = `Are you sure you want delete task "${task.name}"?`
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -35,10 +35,10 @@ const RemoveTask: React.FC<RemoveTaskProps> = ({ task, setModal }) => {
                     onClick={handleCancel}
                     type="button"
                 >
-                    Отмена
+                    Cancel
                 </button>
                 <button className="button button-red" type="submit">
-                    Подтвердить
+                    Submit
                 </button>
             </div>
         </form>

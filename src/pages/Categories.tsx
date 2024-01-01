@@ -40,7 +40,7 @@ export const Categories = () => {
                 <CategoryListItem key={category.id} category={category} />
             ))}
             {categories.length === 0 && (
-                <NothingFound text="Нет ни одной категории? Создайте!" />
+                <NothingFound text="No categories yet. Create!" />
             )}
         </ul>
     )

@@ -16,6 +16,7 @@ export const Header: FC = () => {
     const handleSwitchCreateModal = (
         e: React.MouseEvent<HTMLButtonElement>,
     ) => {
+        e.preventDefault()
         setCreateModalActive((prev) => !prev)
     }
 
@@ -32,7 +33,7 @@ export const Header: FC = () => {
                                 : " font-normal text-[22px]"
                         }
                     >
-                        Задачи
+                        Tasks
                     </NavLink>
                     <NavLink
                         to={"/categories"}
@@ -42,17 +43,17 @@ export const Header: FC = () => {
                                 : "font-normal text-[22px]"
                         }
                     >
-                        Категории
+                        Categories
                     </NavLink>
                 </nav>
                 <button
                     className="button button-indigo h-[64px] max-w-[300px]"
                     onClick={handleSwitchCreateModal}
                 >
-                    {isCategories ? "Добавить категорию" : "Добавить задачу"}
+                    {isCategories ? "Create category" : "Create task"}
                 </button>
                 <Modal
-                    name={"Создание"}
+                    name={"Create"}
                     active={createModalActive}
                     setActive={setCreateModalActive}
                 >

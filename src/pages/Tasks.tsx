@@ -89,13 +89,13 @@ export const Tasks: React.FC = () => {
             <div className={"flex gap-[30px]"}>
                 <Input
                     value={search}
-                    placeholder={"Введите назавние задачи"}
+                    placeholder={"Enter task title"}
                     setValue={setSearch}
                 />
                 <Select
                     options={categories}
                     value={category}
-                    placeholder={"Введите назавние категории"}
+                    placeholder={"Select category title"}
                     setValue={setCategory}
                 />
                 <button
@@ -110,7 +110,7 @@ export const Tasks: React.FC = () => {
                     <TaskListItem key={task.id} task={task} />
                 ))}
                 {viewList.length === 0 && !taskLoading && (
-                    <NothingFound text={"К сожалению, ничего не найдено =("} />
+                    <NothingFound text={"No tasks yet. Create!"} />
                 )}
             </ul>
         </div>

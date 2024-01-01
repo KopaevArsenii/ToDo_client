@@ -24,7 +24,7 @@ const CategoryListItem: FC<CategoryListItemProps> = ({ category }) => {
     return (
         <>
             <Modal
-                name={"Редактирование"}
+                name={"Edit"}
                 active={editModalActive}
                 setActive={setEditModalActive}
                 buttonUnavailable
@@ -36,7 +36,7 @@ const CategoryListItem: FC<CategoryListItemProps> = ({ category }) => {
             </Modal>
 
             <Modal
-                name={"Удаление"}
+                name={"Delete"}
                 active={removeModalActive}
                 setActive={setRemoveModalActive}
             >

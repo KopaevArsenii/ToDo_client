@@ -33,7 +33,7 @@ export const Select: React.FC<SelectProps> = ({
                 <div className="flex gap-[20px] w-full justify-between items-center">
                     <div className="text-[22px] text-indigo-500 truncate">
                         {options.find((option) => option.id === value)?.name ||
-                            "Категории"}
+                            "Category"}
                     </div>
                     <img
                         src={down}

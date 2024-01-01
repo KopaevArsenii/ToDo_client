@@ -58,6 +58,7 @@ const EditTask: FC<EditTaskProps> = ({ task, setModal }) => {
                 label={"Описание"}
                 placeholder={"Введите описание"}
                 setValue={setDescription}
+                required
             />
             <div className="flex gap-[30px] h-[64px]">
                 <button

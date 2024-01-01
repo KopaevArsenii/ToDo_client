@@ -16,7 +16,7 @@ const RemoveCategory: React.FC<RemoveCategoryProps> = ({
     setModal,
 }) => {
     const dispatch = useAppDispatch()
-    const text = `Вы уверены, что хотите удалить категорию "${category.name}"?`
+    const text = `Are you sure you want delete category "${category.name}"?`
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -38,10 +38,10 @@ const RemoveCategory: React.FC<RemoveCategoryProps> = ({
                     onClick={handleCancel}
                     type="button"
                 >
-                    Отмена
+                    Cancel
                 </button>
                 <button className="button button-red" type="submit">
-                    Подтвердить
+                    Submit
                 </button>
             </div>
         </form>
