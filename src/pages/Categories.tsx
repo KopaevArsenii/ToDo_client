@@ -3,14 +3,17 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks"
 
 /* APPLICATION */
 import CategoryListItem from "../components/CategoryListItem"
-import { fetchCategories, getAllCategories } from "../features/categoriesSlice"
+import {
+    fetchCategories,
+    getCategoriesState,
+} from "../features/categoriesSlice"
 import NothingFound from "../components/NothingFound"
 import { useEffect, useRef } from "react"
 import { Id, toast } from "react-toastify"
 
 export const Categories = () => {
     const dispatch = useAppDispatch()
-    const { categories, loading, error } = useAppSelector(getAllCategories)
+    const { categories, loading, error } = useAppSelector(getCategoriesState)
     const toastId = useRef<Id>()
 
     useEffect(() => {
