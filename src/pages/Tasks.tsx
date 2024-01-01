@@ -43,6 +43,7 @@ export const Tasks: React.FC = () => {
             toastId.current = toast.loading("Loading")
         } else if (toastId.current) {
             toast.dismiss(toastId.current)
+            toastId.current = undefined
         }
     }, [taskLoading, categoriesLoading])
 
