@@ -1,6 +1,6 @@
 /* VENDOR */
-import { FC } from "react"
-import { Route, Routes, Navigate } from "react-router-dom"
+import { FC, useEffect } from "react"
+import { Route, Routes, Navigate, useNavigate } from "react-router-dom"
 
 /* APPLICATION */
 import { Header } from "./Header"

@@ -4,6 +4,7 @@ import React, { useState } from "react"
 /* APPLICATION */
 import down from "../icons/down.svg"
 import { ICategory } from "../types"
+import important from "../icons/important.svg"
 
 interface SelectProps {
     options: ICategory[]
@@ -11,6 +12,7 @@ interface SelectProps {
     label?: ICategory["name"]
     placeholder: string
     setValue: React.Dispatch<React.SetStateAction<ICategory["id"]>>
+    required: boolean
 }
 
 //ToDo: show something when no categories
@@ -20,12 +22,18 @@ export const Select: React.FC<SelectProps> = ({
     label,
     placeholder,
     setValue,
+    required,
 }) => {
     const [isActive, setIsActive] = useState<boolean>(false)
 
     return (
         <div className="flex flex-col gap-[10px] w-full">
-            {label && <div className="text-[14px] text-zinc-400">{label}</div>}
+            {label && (
+                <div className="flex gap-[4px]">
+                    <div className="text-[14px] text-zinc-400">{label}</div>
+                    {required && <img src={important} alt="required" />}
+                </div>
+            )}
             <div
                 className="h-[64px] border border-slate-200 hover:border-indigo-500 focus:border-indigo-500 rounded-[10px] px-[40px] flex items-center relative"
                 onClick={() => setIsActive(!isActive)}

@@ -33,6 +33,7 @@ const initialState: TaskSliceState = {
 
 export const getTasks = createAsyncThunk("task/fetchTasks", async () => {
     const header = `Bearer ${localStorage.getItem("jwt")}`
+
     const { data } = await axios.get<ITask[]>(`/api/task`, {
         headers: { Authorization: header },
     })

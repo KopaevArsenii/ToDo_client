@@ -50,6 +50,7 @@ const EditTask: FC<EditTaskProps> = ({ task, setModal }) => {
                     label={"Категория"}
                     placeholder={"Выберете категориб"}
                     setValue={setCategory}
+                    required
                 />
             </div>
 

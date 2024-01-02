@@ -54,6 +54,7 @@ const CreateTask: FC<CreateTaskProps> = ({ setModal }) => {
                     label={"Category"}
                     placeholder={"Select category"}
                     setValue={setCategory}
+                    required
                 />
             </div>
             <Textarea

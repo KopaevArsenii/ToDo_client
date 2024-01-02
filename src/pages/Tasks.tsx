@@ -98,6 +98,7 @@ export const Tasks: React.FC = () => {
                     value={category}
                     placeholder={"Select category title"}
                     setValue={setCategory}
+                    required
                 />
                 <button
                     className="border border-slate-200 hover:border-indigo-500 rounded-[8px] w-[64px] h-[64px] shrink-0"
