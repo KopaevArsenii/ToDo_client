@@ -9,6 +9,7 @@ import { Select } from "../ui/Select"
 import { Textarea } from "../ui/Textarea"
 import { ITask } from "../types"
 import { getCategoriesState } from "../features/categoriesSlice"
+import { toast } from "react-toastify"
 
 interface EditTaskProps {
     task: ITask
@@ -24,7 +25,10 @@ const EditTask: FC<EditTaskProps> = ({ task, setModal }) => {
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        if (name === "") return
+        if (name === "" || description === "") {
+            toast.error("Fill all fields")
+            return
+        }
         dispatch(editTask({ id: task.id, name, description, category }))
         setModal(false)
     }

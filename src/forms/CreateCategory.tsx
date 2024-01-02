@@ -6,6 +6,7 @@ import { useAppDispatch } from "../redux/hooks"
 import { createCategoryById } from "../features/categoriesSlice"
 import { Input } from "../ui/Input"
 import { Textarea } from "../ui/Textarea"
+import { toast } from "react-toastify"
 
 interface CreateCategoryProps {
     setModal: React.Dispatch<React.SetStateAction<boolean>>
@@ -23,7 +24,10 @@ const CreateCategory: FC<CreateCategoryProps> = ({ setModal }) => {
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        if (name === "" || description === "") return
+        if (name === "" || description === "") {
+            toast.error("Fill all fields")
+            return
+        }
         dispatch(createCategoryById({ name, description }))
         clearForm()
         setModal(false)

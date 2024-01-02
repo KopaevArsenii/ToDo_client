@@ -8,6 +8,7 @@ import { Select } from "../ui/Select"
 import { Textarea } from "../ui/Textarea"
 import { createTask } from "../features/tasksSlice"
 import { getCategoriesState } from "../features/categoriesSlice"
+import { toast } from "react-toastify"
 
 interface CreateTaskProps {
     setModal: React.Dispatch<React.SetStateAction<boolean>>
@@ -27,7 +28,10 @@ const CreateTask: FC<CreateTaskProps> = ({ setModal }) => {
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        if (name === "" || description === "") return
+        if (name === "" || description === "" || !category) {
+            toast.error("Fill all fields")
+            return
+        }
         dispatch(createTask({ name, description, category }))
         clearForm()
         setModal(false)

@@ -7,6 +7,7 @@ import { updateCategoryById } from "../features/categoriesSlice"
 import { Input } from "../ui/Input"
 import { Textarea } from "../ui/Textarea"
 import { ICategory } from "../types"
+import { toast } from "react-toastify"
 
 interface EditCategoryProps {
     category: ICategory
@@ -20,7 +21,10 @@ const EditCategory: FC<EditCategoryProps> = ({ category, setModal }) => {
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        if (name === "") return
+        if (name === "" || description === "") {
+            toast.error("Fill all field")
+            return
+        }
         dispatch(updateCategoryById({ id: category.id, name, description }))
         setModal(false)
     }
