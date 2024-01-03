@@ -2,7 +2,7 @@ import { FC, FormEvent, useState } from "react"
 import { Input } from "../ui/Input"
 import { toast } from "react-toastify"
 import axios, { AxiosError } from "axios"
-import { IToken } from "../types"
+import { Token } from "../types"
 import { useNavigate } from "react-router-dom"
 
 const Registration: FC = () => {
@@ -24,7 +24,7 @@ const Registration: FC = () => {
             return
         }
         try {
-            const { data } = await axios.post<IToken>("/api/auth/register", {
+            const { data } = await axios.post<Token>("/api/auth/register", {
                 firstname,
                 lastname,
                 email,

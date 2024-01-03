@@ -1,17 +1,17 @@
-export interface ITask {
+export interface Task {
     id: number
     name: string
     description: string
-    category: ICategory
+    category: Category
     done: boolean
 }
 
-export interface ICategory {
+export interface Category {
     id: number
     name: string
     description: string
 }
 
-export interface IToken {
+export interface Token {
     token: string
 }

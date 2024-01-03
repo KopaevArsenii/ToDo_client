@@ -4,10 +4,10 @@ import { useAppDispatch } from "../redux/hooks"
 
 /* APPLICATION */
 import { deleteCategoryById } from "../features/categoriesSlice"
-import { ICategory } from "../types"
+import { Category } from "../types"
 
 interface RemoveCategoryProps {
-    category: ICategory
+    category: Category
     setModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 

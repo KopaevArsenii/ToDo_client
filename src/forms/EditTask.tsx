@@ -7,12 +7,12 @@ import { editTask } from "../features/tasksSlice"
 import { Input } from "../ui/Input"
 import { Select } from "../ui/Select"
 import { Textarea } from "../ui/Textarea"
-import { ITask } from "../types"
+import { Task } from "../types"
 import { getCategoriesState } from "../features/categoriesSlice"
 import { toast } from "react-toastify"
 
 interface EditTaskProps {
-    task: ITask
+    task: Task
     setModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 

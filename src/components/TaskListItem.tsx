@@ -12,10 +12,10 @@ import EditTask from "../forms/EditTask"
 import RemoveTask from "../forms/RemoveTask"
 import edit from "../icons/edit.svg"
 import remove from "../icons/remove.svg"
-import { ITask } from "../types"
+import { Task } from "../types"
 
 interface TaskListItemProps {
-    task: ITask
+    task: Task
 }
 
 const TaskListItem: FC<TaskListItemProps> = ({ task }) => {
@@ -36,7 +36,7 @@ const TaskListItem: FC<TaskListItemProps> = ({ task }) => {
     }
     const handleSwitchTaskDone = (
         e: React.MouseEvent<HTMLButtonElement>,
-        id: ITask["id"],
+        id: Task["id"],
     ) => {
         e.preventDefault()
         dispatch(switchTask(id))

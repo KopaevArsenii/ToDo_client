@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 
 /* APPLICATION */
 import { RootState } from "../redux/store"
-import { ITask } from "../types"
+import { Task } from "../types"
 import axios from "axios"
 
 export interface ICreateTask {
@@ -20,7 +20,7 @@ export interface IEditTask {
 }
 
 export interface TaskSliceState {
-    tasks: ITask[]
+    tasks: Task[]
     loading: boolean
     error: string
 }
@@ -34,7 +34,7 @@ const initialState: TaskSliceState = {
 export const getTasks = createAsyncThunk("task/fetchTasks", async () => {
     const header = `Bearer ${localStorage.getItem("jwt")}`
 
-    const { data } = await axios.get<ITask[]>(`/api/task`, {
+    const { data } = await axios.get<Task[]>(`/api/task`, {
         headers: { Authorization: header },
     })
 
@@ -43,7 +43,7 @@ export const getTasks = createAsyncThunk("task/fetchTasks", async () => {
 
 export const deleteTask = createAsyncThunk(
     "task/deleteTaskById",
-    async (id: ITask["id"]) => {
+    async (id: Task["id"]) => {
         const header = `Bearer ${localStorage.getItem("jwt")}`
         await axios.delete<string>(`/api/task/delete?id=${id}`, {
             headers: { Authorization: header },
@@ -56,7 +56,7 @@ export const editTask = createAsyncThunk(
     "task/updateTaskById",
     async (task: IEditTask) => {
         const header = `Bearer ${localStorage.getItem("jwt")}`
-        const { data } = await axios.put<ITask>(
+        const { data } = await axios.put<Task>(
             `/api/task/edit?id=${task.id}`,
             {
                 name: task.name,
@@ -74,7 +74,7 @@ export const createTask = createAsyncThunk(
     "task/createTaskById",
     async (task: ICreateTask) => {
         const header = `Bearer ${localStorage.getItem("jwt")}`
-        const { data } = await axios.post<ITask>(
+        const { data } = await axios.post<Task>(
             `/api/task/create`,
             {
                 name: task.name,
@@ -90,7 +90,7 @@ export const createTask = createAsyncThunk(
 
 export const switchTask = createAsyncThunk(
     "task/switchTaskAsDone",
-    async (id: ITask["id"]) => {
+    async (id: Task["id"]) => {
         const header = `Bearer ${localStorage.getItem("jwt")}`
         await axios.get<string>(`/api/task/switch?id=${id}`, {
             headers: { Authorization: header },

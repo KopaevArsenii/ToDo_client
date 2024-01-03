@@ -14,7 +14,7 @@ import {
     getCategoriesState,
 } from "../features/categoriesSlice"
 import { Id, toast } from "react-toastify"
-import { ICategory } from "../types"
+import { Category } from "../types"
 
 export const Tasks: React.FC = () => {
     const dispatch = useAppDispatch()
@@ -31,7 +31,7 @@ export const Tasks: React.FC = () => {
     const toastId = useRef<Id>()
 
     const [search, setSearch] = useState<string>("")
-    const [category, setCategory] = useState<ICategory["id"]>(0)
+    const [category, setCategory] = useState<Category["id"]>(0)
 
     useEffect(() => {
         dispatch(fetchCategories())

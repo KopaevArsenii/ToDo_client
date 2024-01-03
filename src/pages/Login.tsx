@@ -3,7 +3,7 @@ import { FC, FormEvent, useState } from "react"
 import { toast } from "react-toastify"
 import axios, { AxiosError } from "axios"
 import { useNavigate } from "react-router-dom"
-import { IToken } from "../types"
+import { Token } from "../types"
 
 export const Login: FC = () => {
     const navigate = useNavigate()
@@ -22,7 +22,7 @@ export const Login: FC = () => {
         }
 
         try {
-            const { data } = await axios.post<IToken>("/api/auth/login", {
+            const { data } = await axios.post<Token>("/api/auth/login", {
                 email,
                 password,
             })

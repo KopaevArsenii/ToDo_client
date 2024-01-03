@@ -7,10 +7,10 @@ import EditCategory from "../forms/EditCategory"
 import RemoveCategory from "../forms/RemoveCategory"
 import edit from "../icons/edit.svg"
 import remove from "../icons/remove.svg"
-import { ICategory } from "../types"
+import { Category } from "../types"
 
 interface CategoryListItemProps {
-    category: ICategory
+    category: Category
 }
 const CategoryListItem: FC<CategoryListItemProps> = ({ category }) => {
     const [editModalActive, setEditModalActive] = useState<boolean>(false)

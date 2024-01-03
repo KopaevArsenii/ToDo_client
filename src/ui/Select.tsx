@@ -3,15 +3,15 @@ import React, { useState } from "react"
 
 /* APPLICATION */
 import down from "../icons/down.svg"
-import { ICategory } from "../types"
+import { Category } from "../types"
 import important from "../icons/important.svg"
 
 interface SelectProps {
-    options: ICategory[]
-    value: ICategory["id"] | undefined
-    label?: ICategory["name"]
+    options: Category[]
+    value: Category["id"] | undefined
+    label?: Category["name"]
     placeholder: string
-    setValue: React.Dispatch<React.SetStateAction<ICategory["id"]>>
+    setValue: React.Dispatch<React.SetStateAction<Category["id"]>>
     required: boolean
 }
 

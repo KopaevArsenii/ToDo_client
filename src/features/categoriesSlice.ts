@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 
 /* APPLICATION */
 import { RootState } from "../redux/store"
-import { ICategory } from "../types"
+import { Category } from "../types"
 import axios from "axios"
 
 export interface ICreateCategory {
@@ -12,7 +12,7 @@ export interface ICreateCategory {
 }
 
 export interface CategorySliceState {
-    categories: ICategory[]
+    categories: Category[]
     loading: boolean
     error: string
 }
@@ -26,7 +26,7 @@ export const fetchCategories = createAsyncThunk(
     "category/fetchCategories",
     async () => {
         const header = `Bearer ${localStorage.getItem("jwt")}`
-        const { data } = await axios.get<ICategory[]>("/api/category", {
+        const { data } = await axios.get<Category[]>("/api/category", {
             headers: { Authorization: header },
         })
         return data
@@ -35,7 +35,7 @@ export const fetchCategories = createAsyncThunk(
 
 export const deleteCategoryById = createAsyncThunk(
     "category/deleteCategoryById",
-    async (id: ICategory["id"]) => {
+    async (id: Category["id"]) => {
         const header = `Bearer ${localStorage.getItem("jwt")}`
         await axios.delete<string>(`/api/category/delete?id=${id}`, {
             headers: { Authorization: header },
@@ -46,7 +46,7 @@ export const deleteCategoryById = createAsyncThunk(
 
 export const updateCategoryById = createAsyncThunk(
     "category/updateCategory",
-    async (category: ICategory) => {
+    async (category: Category) => {
         const header = `Bearer ${localStorage.getItem("jwt")}`
         await axios.put<string>(
             `/api/category/edit?id=${category.id}`,
@@ -66,7 +66,7 @@ export const createCategoryById = createAsyncThunk(
     "category/createCategoryById",
     async (category: ICreateCategory) => {
         const header = `Bearer ${localStorage.getItem("jwt")}`
-        const { data } = await axios.post<ICategory>(
+        const { data } = await axios.post<Category>(
             `/api/category/create`,
             category,
             { headers: { Authorization: header } },

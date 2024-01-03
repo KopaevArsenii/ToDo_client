@@ -6,11 +6,11 @@ import { useAppDispatch } from "../redux/hooks"
 import { updateCategoryById } from "../features/categoriesSlice"
 import { Input } from "../ui/Input"
 import { Textarea } from "../ui/Textarea"
-import { ICategory } from "../types"
+import { Category } from "../types"
 import { toast } from "react-toastify"
 
 interface EditCategoryProps {
-    category: ICategory
+    category: Category
     setModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 

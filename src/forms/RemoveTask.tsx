@@ -4,10 +4,10 @@ import { useAppDispatch } from "../redux/hooks"
 
 /* APPLICATION */
 import { deleteTask } from "../features/tasksSlice"
-import { ITask } from "../types"
+import { Task } from "../types"
 
 interface RemoveTaskProps {
-    task: ITask
+    task: Task
     setModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 
